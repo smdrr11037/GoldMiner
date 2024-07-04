@@ -42,6 +42,8 @@ MSBuild ALL_BUILD.vcxproj /t:build /p:Configuration=Debug
 * 等待当前组长审核，通过后 github 会发邮件通知大家拉取新的代码
 * 不需要删除旧分支，一个人的改动固定提交到该分支即可
 
+--------
+
 
 ```mermaid
 gitGraph
@@ -75,6 +77,11 @@ gitGraph
 
    checkout main
 ```
+
+tips: 本地切换到 CounterDemo 分支（即其他分支）的方法
+
+* `git checkout -b CouterDemo origin/CounterDemo`
+* 注意，`pull` 指令只会拉取当前所在分支对应的远程分支，不会更新所有分支
 
 ## 命名规范
 
