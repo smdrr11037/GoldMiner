@@ -1,0 +1,8 @@
+# �������е� .json �ļ�
+*.json
+
+# ����Ŀ¼
+build/
+refer/
+out/
+.vs/
