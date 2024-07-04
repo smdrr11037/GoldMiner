@@ -1,6 +1,6 @@
 ﻿#include <QApplication>
 #include <QWidget>
-#include "src/app.h"
+// #include "src/app.h"
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     QWidget window;
