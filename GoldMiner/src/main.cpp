@@ -1,7 +1,9 @@
 ﻿#include <QApplication>
 #include <QWidget>
-// #include "src/app.h"
-int main(int argc, char* argv[]) {
+// 还没实现好
+// #include "app/app.h"
+int main(int argc, char *argv[])
+{
     QApplication app(argc, argv);
     QWidget window;
     // demo：产生一个空白的窗口
