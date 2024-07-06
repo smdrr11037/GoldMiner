@@ -9,17 +9,26 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
-#include "../viewmodel/ViewModel.h"
+#include "../common/GoldMinerDef.h"
 // 继承自 QWidget，表示这个类是一个窗口部件
 class StartPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit StartPage(CounterViewModel *viewModel, QWidget *parent = nullptr);
+    explicit StartPage(QWidget *parent = nullptr);
+    /*~StartPage() {
+        delete startButton;
+        delete layout;
+    }*/
+
+signals:
+    void startGame(GameState gameState);
+
+private slots:
+    void startButtonClicked();
 
 private:
-    ViewModel *m_viewModel;
     QPushButton *startButton; // 指向 QPushButton 对象的指针，用于游戏开始的按钮
     QVBoxLayout *layout;      // 指向 QVBoxLayout 对象的指针，用于管理视图的布局
 };
