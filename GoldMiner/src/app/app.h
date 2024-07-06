@@ -3,7 +3,7 @@
 #define APP_H
 
 #include "../model/Model.h"
-#include "../viewmodel/ViewModel"
+#include "../viewmodel/ViewModel.h"
 #include "../window/CompletePage.h"
 #include "../window/StartPage.h"
 #include "../window/GamePage.h"

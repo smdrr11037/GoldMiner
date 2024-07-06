@@ -3,17 +3,20 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <memory>
-#include "any.h"
+#include <any>
 #include <vector>
 #include <map>
 #include <stack>
 
 //types
+
+typedef long              int64;
+typedef unsigned long     uint64;
 typedef unsigned char     uchar;
 typedef unsigned short    ushort;
 typedef unsigned int      uint;
-typedef unsigned __int64  uint64;
-typedef __int64           int64;
+
+
 
 //command
 
@@ -27,7 +30,7 @@ class ICommandBase
 {
 public:
 	//virtual void SetParameter(const std::shared_ptr<ICommandParameter>& param) = 0;
-    virtual void SetParameter(const _new_any_space_::any& param) = 0;
+    virtual void SetParameter(const std::any& param) = 0;
 	virtual void Exec() = 0;
 /*
 virtual std::shared_ptr<ICommandBase> get_Undo() = 0;
@@ -124,7 +127,7 @@ public:
 class IStateBase
 {
 public:
-    virtual int Process(unsigned int uEvent, _new_any_space_::any& param) = 0;
+    virtual int Process(unsigned int uEvent, std::any& param) = 0;
 };
 
 class StateManager

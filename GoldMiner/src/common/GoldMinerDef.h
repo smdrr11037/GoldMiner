@@ -24,7 +24,10 @@ public:
         return isGold;
     }
 
-    // 获取块的大小
+    /**
+     * @brief 获取块的大小
+     * 
+     */
     int getSize() const
     {
         return size;
