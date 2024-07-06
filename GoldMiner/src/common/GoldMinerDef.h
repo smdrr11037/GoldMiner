@@ -95,6 +95,14 @@ private:
     Position position;
 };
 
+enum class GameState // 游戏所处的页面
+{
+    Start,
+    Running,
+    Paused, // 后续可能增加暂停的功能
+    GameOver
+};
+
 class IGameObserver // 观察者模式接口，ViewModel可以实现该接口来监听Model的变化
 // GPT 写的，我也不知道什么东西
 {
@@ -104,12 +112,6 @@ public:
     virtual void onTimeUpdated(int remainingTime) = 0;
 };
 
-enum class GameState // 游戏所处的页面
-{
-    Start,
-    Running,
-    Paused, // 后续可能增加暂停的功能
-    GameOver
-};
+
 
 #endif // GOLD_MINER_DEF_H
