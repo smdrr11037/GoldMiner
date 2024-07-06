@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
-#include "../viewmodel/ViewModel.h"
+#include "../common/GoldMinerDef.h"
 // 继承自 QWidget，表示这个类是一个窗口部件
 class StartPage : public QWidget
 {
@@ -17,6 +17,12 @@ class StartPage : public QWidget
 
 public:
     explicit StartPage(CounterViewModel *viewModel, QWidget *parent = nullptr);
+
+signals:
+    void startGame(GameState gameState);
+
+private slots:
+    void startButtonClicked();
 
 private:
     ViewModel *m_viewModel;
