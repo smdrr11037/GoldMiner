@@ -19,7 +19,7 @@ class RunningPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit RunningPage(GameViewModel* viewModel, QWidget* parent = nullptr);
+    explicit RunningPage(QWidget* parent = nullptr);
 
 signals:
     void exitGame(); // 退出游戏的信号  

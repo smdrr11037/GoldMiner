@@ -16,7 +16,7 @@ class StartPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit StartPage(CounterViewModel *viewModel, QWidget *parent = nullptr);
+    explicit StartPage(QWidget *parent = nullptr);
 
 signals:
     void startGame(GameState gameState);

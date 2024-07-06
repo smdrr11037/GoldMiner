@@ -17,7 +17,7 @@ class CompletePage : public QWidget
     Q_OBJECT
 
 public:
-    explicit CompletePage(CounterViewModel* viewModel, QWidget* parent = nullptr);
+    explicit CompletePage(QWidget* parent = nullptr);
 
 signals:
     void nextLevel(); // 进入下一关的信号  
