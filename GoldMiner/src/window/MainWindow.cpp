@@ -10,48 +10,48 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
     setCentralWidget(startPage);
 
-    // MainWindow ¹¹Ôìº¯ÊıÖĞ  
-    // Á¬½Ó StartPage µÄ startGame ĞÅºÅµ½ MainWindow µÄ²Ûº¯Êı  
+    // MainWindow æ„é€ å‡½æ•°ä¸­  
+    // è¿æ¥ StartPage çš„ startGame ä¿¡å·åˆ° MainWindow çš„æ§½å‡½æ•°  
     connect(startPage, &StartPage::startGame, this, &MainWindow::handleStartButtonClicked);
 
-    // Á¬½Ó RunningPage µÄ exitGame ĞÅºÅµ½ MainWindow µÄ²Ûº¯Êı  
+    // è¿æ¥ RunningPage çš„ exitGame ä¿¡å·åˆ° MainWindow çš„æ§½å‡½æ•°  
     connect(runningPage, &RunningPage::exitGame, this, &MainWindow::handleExitButtonClicked);
 
-    // Á¬½Ó Complete µÄ nextLevel ĞÅºÅµ½ MainWindow µÄ²Ûº¯Êı  
+    // è¿æ¥ Complete çš„ nextLevel ä¿¡å·åˆ° MainWindow çš„æ§½å‡½æ•°  
     connect(completePage, &CompletePage::nextLevel, this, &MainWindow::handleNextLevelButtonClicked);
 
     //TODO : 
-    //Á¬½Ó RunningPage µÄ 
-    //±ğµÄÄ£¿é·¢À´µÄ ¡°Í¨¹Ø¡± ĞÅºÅµ½ MainWindow µÄ²Ûº¯Êı  
+    //è¿æ¥ RunningPage çš„ 
+    //åˆ«çš„æ¨¡å—å‘æ¥çš„ â€œé€šå…³â€ ä¿¡å·åˆ° MainWindow çš„æ§½å‡½æ•°  
     //connect(completePage, &CompletePage::nextLevel, this, &MainWindow::handleNextLevelButtonClicked);
 }
 
-// ´¦Àí¡°¿ªÊ¼¡±°´Å¥µã»÷µÄ²Ûº¯Êı  
+// å¤„ç†â€œå¼€å§‹â€æŒ‰é’®ç‚¹å‡»çš„æ§½å‡½æ•°  
 void MainWindow::handleStartButtonClicked(GameState gameState)
 {
     if (gameState == GameState::Running) {
         setCentralWidget(runningPage);
     }
 
-    // ·¢ÉäĞÅºÅÍ¨Öª viewmodel ²ã  
+    // å‘å°„ä¿¡å·é€šçŸ¥ viewmodel å±‚  
     emit StartToRunGame(GameState::Running);
 }
 
-// ´¦Àí ÓÎÏ·ÖĞ¡°ÍË³ö¡±°´Å¥µã»÷µÄ²Ûº¯Êı  
+// å¤„ç† æ¸¸æˆä¸­â€œé€€å‡ºâ€æŒ‰é’®ç‚¹å‡»çš„æ§½å‡½æ•°  
 void MainWindow::handleExitButtonClicked()
 {
-    //Ôİ¶¨Ö±½Ó·µ»Ø¿ªÊ¼½çÃæ
+    //æš‚å®šç›´æ¥è¿”å›å¼€å§‹ç•Œé¢
     setCentralWidget(startPage);
 
-    // ·¢ÉäĞÅºÅÍ¨Öª viewmodel ²ã  
+    // å‘å°„ä¿¡å·é€šçŸ¥ viewmodel å±‚  
     emit RunToExit(GameState::GameOver);
 }
 
-// ´¦Àí ÓÎÏ·½áÊøºócomp½çÃæ¡°ÏÂÒ»¹Ø¡±°´Å¥µã»÷ºó£¬½øÈëÏÂÒ»¹ØRunningPageµÄ²Ûº¯Êı  
+// å¤„ç† æ¸¸æˆç»“æŸåcompç•Œé¢â€œä¸‹ä¸€å…³â€æŒ‰é’®ç‚¹å‡»åï¼Œè¿›å…¥ä¸‹ä¸€å…³RunningPageçš„æ§½å‡½æ•°  
 void MainWindow::handleNextLevelButtonClicked()
 {
     setCentralWidget(runningPage);
 
-    // ·¢ÉäĞÅºÅÍ¨Öª viewmodel ²ã  
+    // å‘å°„ä¿¡å·é€šçŸ¥ viewmodel å±‚  
     emit CompleteToNextRun(GameState::Running);
 }

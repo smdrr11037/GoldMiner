@@ -3,18 +3,18 @@
 
 StartPage::StartPage(CounterViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
 {
-    // ÉèÖÃ±³¾°Í¼Æ¬  
+    // è®¾ç½®èƒŒæ™¯å›¾ç‰‡  
     //setStyleSheet("QWidget { background-image: url(:/background.jpg); }");
     QString imagePath = "image/start_background.jpg";
     setStyleSheet("QWidget { background-image: url(" + imagePath + "); }");
 
-    // ´´½¨¿ªÊ¼ÓÎÏ·°´Å¥  
-    startButton = new QPushButton("¿ªÊ¼ÓÎÏ·", this);
+    // åˆ›å»ºå¼€å§‹æ¸¸æˆæŒ‰é’®  
+    startButton = new QPushButton("å¼€å§‹æ¸¸æˆ", this);
 
-    // Á¬½Ó°´Å¥µÄµã»÷ĞÅºÅµ½²Ûº¯Êı  
+    // è¿æ¥æŒ‰é’®çš„ç‚¹å‡»ä¿¡å·åˆ°æ§½å‡½æ•°  
     connect(startButton, &QPushButton::clicked, this, &StartPage::startGame);
 
-    // ´´½¨²¼¾Ö¹ÜÀíÆ÷  
+    // åˆ›å»ºå¸ƒå±€ç®¡ç†å™¨  
     layout = new QVBoxLayout(this);
     layout->addWidget(startButton);
 }
@@ -22,6 +22,6 @@ StartPage::StartPage(CounterViewModel* viewModel, QWidget* parent) : QWidget(par
 
 void StartPage::startButtonClicked()
 {
-    // ·¢ÉäĞÅºÅ£¬½«ÓÎÏ·×´Ì¬ÇĞ»»Îª Running  
+    // å‘å°„ä¿¡å·ï¼Œå°†æ¸¸æˆçŠ¶æ€åˆ‡æ¢ä¸º Running  
     emit startGame(GameState::Running);
 }

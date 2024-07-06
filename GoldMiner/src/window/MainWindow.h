@@ -19,23 +19,23 @@ public:
     explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow(){}
 
-//ÔÚ²Ûº¯ÊıÖĞĞèÒª·¢ÉäµÄĞÅºÅ
+//åœ¨æ§½å‡½æ•°ä¸­éœ€è¦å‘å°„çš„ä¿¡å·
 signals:
     void StartToRunGame(GameState gameState);
-//signals:Õâ¸öÓ¦¸ÃÊÇ±ğµÄÄ£¿é´«À´µÄĞÅºÅ£¬ÅĞ¶Ï¼ÆÊ±½áÊøºóÊÇ·ñÍ¨¹Ø
+//signals:è¿™ä¸ªåº”è¯¥æ˜¯åˆ«çš„æ¨¡å—ä¼ æ¥çš„ä¿¡å·ï¼Œåˆ¤æ–­è®¡æ—¶ç»“æŸåæ˜¯å¦é€šå…³
 //    void RunToCompleteGame(GameState gameState);
 signals:
     void RunToExit(GameState gameState);
 signals:
     void CompleteToNextRun(GameState gameState);
 
-//´ıÊµÏÖ²Ûº¯Êı
+//å¾…å®ç°æ§½å‡½æ•°
 private slots:
     void handleStartButtonClicked(GameState gameState);
 private slots:
     void handleExitButtonClicked();
 private slots:
-    void handleNextLevelButtonClicked();        //ºóĞø¿É´ø²ÎÊı£¿ÄÄÒ»¹Ø
+    void handleNextLevelButtonClicked();        //åç»­å¯å¸¦å‚æ•°ï¼Ÿå“ªä¸€å…³
 
 private:
     StartPage* startPage;

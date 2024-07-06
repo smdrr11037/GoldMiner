@@ -3,24 +3,24 @@
 
 CompletePage::CompletePage(CounterViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
 {
-    // ÉèÖÃ±³¾°Í¼Æ¬  
-    QString imagePath = "image/victory_background.jpg"; // ¼ÙÉèÕâÊÇÊ¤ÀûÒ³ÃæµÄ±³¾°Í¼Æ¬Â·¾¶  
+    // è®¾ç½®èƒŒæ™¯å›¾ç‰‡  
+    QString imagePath = "image/victory_background.jpg"; // å‡è®¾è¿™æ˜¯èƒœåˆ©é¡µé¢çš„èƒŒæ™¯å›¾ç‰‡è·¯å¾„  
     setStyleSheet("QWidget { background-image: url(" + imagePath + "); }");
 
-    // ´´½¨ÏÔÊ¾ÓÎÏ·Ê¤Àû»­ÃæµÄ±êÇ©  
+    // åˆ›å»ºæ˜¾ç¤ºæ¸¸æˆèƒœåˆ©ç”»é¢çš„æ ‡ç­¾  
     victoryImageLabel = new QLabel(this);
-    // ÉèÖÃÊ¤Àû»­ÃæÍ¼Æ¬  
-    QPixmap victoryImage("image/victory_image.png"); // ¼ÙÉèÕâÊÇÊ¤Àû»­ÃæµÄÍ¼Æ¬Â·¾¶  
+    // è®¾ç½®èƒœåˆ©ç”»é¢å›¾ç‰‡  
+    QPixmap victoryImage("image/victory_image.png"); // å‡è®¾è¿™æ˜¯èƒœåˆ©ç”»é¢çš„å›¾ç‰‡è·¯å¾„  
     victoryImageLabel->setPixmap(victoryImage);
     victoryImageLabel->setAlignment(Qt::AlignCenter);
 
-    // ´´½¨½øÈëÏÂÒ»¹Ø°´Å¥  
-    nextLevelButton = new QPushButton("ÏÂÒ»¹Ø", this);
+    // åˆ›å»ºè¿›å…¥ä¸‹ä¸€å…³æŒ‰é’®  
+    nextLevelButton = new QPushButton("ä¸‹ä¸€å…³", this);
 
-    // Á¬½Ó°´Å¥µÄµã»÷ĞÅºÅµ½²Ûº¯Êı  
+    // è¿æ¥æŒ‰é’®çš„ç‚¹å‡»ä¿¡å·åˆ°æ§½å‡½æ•°  
     connect(nextLevelButton, &QPushButton::clicked, this, &CompletePage::nextLevelButtonClicked);
 
-    // ´´½¨²¼¾Ö¹ÜÀíÆ÷  
+    // åˆ›å»ºå¸ƒå±€ç®¡ç†å™¨  
     layout = new QVBoxLayout(this);
     layout->addWidget(victoryImageLabel);
     layout->addWidget(nextLevelButton);
@@ -28,6 +28,6 @@ CompletePage::CompletePage(CounterViewModel* viewModel, QWidget* parent) : QWidg
 
 void CompletePage::nextLevelButtonClicked()
 {
-    // ·¢ÉäĞÅºÅ£¬Í¨Öª½øÈëÏÂÒ»¹Ø  
+    // å‘å°„ä¿¡å·ï¼Œé€šçŸ¥è¿›å…¥ä¸‹ä¸€å…³  
     emit nextLevel();
 }

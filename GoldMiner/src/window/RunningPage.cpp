@@ -3,23 +3,23 @@
 
 RunningPage::RunningPage(GameViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
 {
-    // ÉèÖÃ±³¾°Í¼Æ¬  
-    QString imagePath = "image/running_background.jpg"; // ÔËĞĞÒ³ÃæµÄ±³¾°Í¼Æ¬Â·¾¶  
+    // è®¾ç½®èƒŒæ™¯å›¾ç‰‡  
+    QString imagePath = "image/running_background.jpg"; // è¿è¡Œé¡µé¢çš„èƒŒæ™¯å›¾ç‰‡è·¯å¾„  
     setStyleSheet("QWidget { background-image: url(" + imagePath + "); }");
 
-    // ´´½¨·ÖÊıÏÔÊ¾±êÇ©  
+    // åˆ›å»ºåˆ†æ•°æ˜¾ç¤ºæ ‡ç­¾  
     scoreLabel = new QLabel("Score: 0", this);
 
-    // ´´½¨¹ı¹ØÄ¿±êÏÔÊ¾±êÇ©  Êµ¼ÊĞèÒª´«Èëµ±Ç°levelµÄÄÑ¶È¶ÔÓ¦Ä¿±ê·ÖÊı
+    // åˆ›å»ºè¿‡å…³ç›®æ ‡æ˜¾ç¤ºæ ‡ç­¾  å®é™…éœ€è¦ä¼ å…¥å½“å‰levelçš„éš¾åº¦å¯¹åº”ç›®æ ‡åˆ†æ•°
     targetLabel = new QLabel("Target Points: 100", this);
 
-    // ´´½¨ÍË³ö°´Å¥  
-    exitButton = new QPushButton("ÍË³öÓÎÏ·", this);
+    // åˆ›å»ºé€€å‡ºæŒ‰é’®  
+    exitButton = new QPushButton("é€€å‡ºæ¸¸æˆ", this);
 
-    // Á¬½ÓÍË³ö°´Å¥µÄµã»÷ĞÅºÅµ½²Ûº¯Êı  
+    // è¿æ¥é€€å‡ºæŒ‰é’®çš„ç‚¹å‡»ä¿¡å·åˆ°æ§½å‡½æ•°  
     connect(exitButton, &QPushButton::clicked, this, &RunningPage::exitButtonClicked);
 
-    // ´´½¨²¼¾Ö¹ÜÀíÆ÷  
+    // åˆ›å»ºå¸ƒå±€ç®¡ç†å™¨  
     layout = new QVBoxLayout(this);
     layout->addWidget(scoreLabel);
     layout->addWidget(targetLabel);
@@ -28,6 +28,6 @@ RunningPage::RunningPage(GameViewModel* viewModel, QWidget* parent) : QWidget(pa
 
 void RunningPage::exitButtonClicked()
 {
-    // ·¢ÉäĞÅºÅ£¬Í¨ÖªÓÎÏ·ÍË³ö  
+    // å‘å°„ä¿¡å·ï¼Œé€šçŸ¥æ¸¸æˆé€€å‡º  
     emit exitGame();
 }
