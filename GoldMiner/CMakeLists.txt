@@ -9,6 +9,7 @@ SET(SRC_LIST "src/main.cpp"
 	# "src/model/Model.cpp"
 	# "src/viewmodel/ViewModel.cpp"
 	# "src/window/StatPage.cpp"
+	"src/app/app.cpp"
 	)
 
 SET(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
