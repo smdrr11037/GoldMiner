@@ -22,13 +22,11 @@ public:
     explicit RunningPage(QWidget* parent = nullptr);
 
 signals:
-    void exitGame(); // 退出游戏的信号  
-
+    void exitGame(GameState gameState); // 退出游戏的信号  
 private slots:
     void exitButtonClicked(); // 退出按钮点击时的槽函数  
 
 private:
-    GameViewModel* m_viewModel;
     QLabel* scoreLabel;       // 分数显示的标签  
     QLabel* targetLabel;      // 过关目标显示的标签  
     QPushButton* exitButton;  // 退出按钮  

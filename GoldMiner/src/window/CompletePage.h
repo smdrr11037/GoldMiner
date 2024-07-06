@@ -26,7 +26,6 @@ private slots:
     void nextLevelButtonClicked(); // 下一关按钮点击时的槽函数  
 
 private:
-    CounterViewModel* m_viewModel;
     QLabel* victoryImageLabel;    // 显示游戏胜利画面的标签  
     QPushButton* nextLevelButton; // 进入下一关按钮  
     QVBoxLayout* layout;           // 用于管理视图的布局  

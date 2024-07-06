@@ -4,8 +4,10 @@
 CompletePage::CompletePage(QWidget* parent) : QWidget(parent)
 {
     // 设置背景图片  
-    QString imagePath = "image/victory_background.jpg"; // 假设这是胜利页面的背景图片路径  
+    /*
+    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/victory_background.jpg";
     setStyleSheet("QWidget { background-image: url(" + imagePath + "); }");
+    */
 
     // 创建显示游戏胜利画面的标签  
     victoryImageLabel = new QLabel(this);
@@ -15,7 +17,7 @@ CompletePage::CompletePage(QWidget* parent) : QWidget(parent)
     victoryImageLabel->setAlignment(Qt::AlignCenter);
 
     // 创建进入下一关按钮  
-    nextLevelButton = new QPushButton("下一关", this);
+    nextLevelButton = new QPushButton("Next Level", this);
 
     // 连接按钮的点击信号到槽函数  
     connect(nextLevelButton, &QPushButton::clicked, this, &CompletePage::nextLevelButtonClicked);

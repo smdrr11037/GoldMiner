@@ -4,15 +4,14 @@
 StartPage::StartPage(QWidget* parent) : QWidget(parent)
 {
     // 设置背景图片  
-    //setStyleSheet("QWidget { background-image: url(:/background.jpg); }");
-    QString imagePath = "image/start_background.jpg";
-    setStyleSheet("QWidget { background-image: url(" + imagePath + "); }");
+    /*QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
+    setStyleSheet("QWidget { background-image: url(" + imagePath + "); background-size: cover; }");*/
 
     // 创建开始游戏按钮  
-    startButton = new QPushButton("开始游戏", this);
+    startButton = new QPushButton("Start Game", this);
 
     // 连接按钮的点击信号到槽函数  
-    connect(startButton, &QPushButton::clicked, this, &StartPage::startGame);
+    connect(startButton, &QPushButton::clicked, this, &StartPage::startButtonClicked);
 
     // 创建布局管理器  
     layout = new QVBoxLayout(this);
