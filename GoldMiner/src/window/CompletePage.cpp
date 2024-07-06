@@ -1,7 +1,7 @@
 #include "CompletePage.h"  
 #include <QVBoxLayout>  
 
-CompletePage::CompletePage(CounterViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
+CompletePage::CompletePage(QWidget* parent) : QWidget(parent)
 {
     // 设置背景图片  
     QString imagePath = "image/victory_background.jpg"; // 假设这是胜利页面的背景图片路径  

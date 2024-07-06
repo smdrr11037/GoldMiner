@@ -1,7 +1,7 @@
 #include "StartPage.h"  
 #include <QVBoxLayout>  
 
-StartPage::StartPage(CounterViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
+StartPage::StartPage(QWidget* parent) : QWidget(parent)
 {
     // 设置背景图片  
     //setStyleSheet("QWidget { background-image: url(:/background.jpg); }");

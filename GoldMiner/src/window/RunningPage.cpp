@@ -1,7 +1,7 @@
 #include "RunningPage.h"  
 #include <QVBoxLayout>  
 
-RunningPage::RunningPage(GameViewModel* viewModel, QWidget* parent) : QWidget(parent), m_viewModel(viewModel)
+RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 {
     // 设置背景图片  
     QString imagePath = "image/running_background.jpg"; // 运行页面的背景图片路径  
