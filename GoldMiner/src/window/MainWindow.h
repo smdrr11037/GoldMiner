@@ -6,6 +6,9 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QStackedWidget>
+#include <QDir>
+#include <QCoreApplication> 
 #include "StartPage.h"  
 #include "RunningPage.h"  
 #include "CompletePage.h"
@@ -34,6 +37,7 @@ private slots:
     void handleNextLevelButtonClicked();        //后续可带参数？哪一关
 
 private:
+    QStackedWidget* stackedWidget;
     StartPage* startPage;
     RunningPage* runningPage;
     CompletePage* completePage;

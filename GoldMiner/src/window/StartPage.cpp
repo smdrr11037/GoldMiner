@@ -3,19 +3,22 @@
 
 StartPage::StartPage(QWidget* parent) : QWidget(parent)
 {
-    // 设置背景图片  
-    /*QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
-    setStyleSheet("QWidget { background-image: url(" + imagePath + "); background-size: cover; }");*/
-
-    // 创建开始游戏按钮  
+    // 设置背景图片  可否在此处实现
+ 
+    // 创建一个圆形按钮  
+    //RoundButton* roundButton = new RoundButton("Start Game", this);
+    //roundButton->setGeometry(200, 200, 100, 100);  // 设置按钮的位置和大小  
+    //roundButton->setStyleSheet("color: black; font-size: 16px;");
     startButton = new QPushButton("Start Game", this);
+    startButton->setStyleSheet("background-color: yellow; color: black; border-radius: 50px; padding: 100px 200px;");
 
     // 连接按钮的点击信号到槽函数  
     connect(startButton, &QPushButton::clicked, this, &StartPage::startButtonClicked);
 
     // 创建布局管理器  
     layout = new QVBoxLayout(this);
-    layout->addWidget(startButton);
+    layout->addStretch(1);  // 添加一个弹簧，将按钮推到底部  
+    layout->addWidget(startButton, 0.5, Qt::AlignCenter);  // 将按钮放在布局的底部并水平居中
 }
 
 

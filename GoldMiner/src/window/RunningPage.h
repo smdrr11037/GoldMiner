@@ -13,6 +13,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QCoreApplication>
 #include "../common/GoldMinerDef.h"
 class RunningPage : public QWidget
 {
