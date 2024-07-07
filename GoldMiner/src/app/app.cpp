@@ -1,8 +1,7 @@
 #include "app.h"
 GameAPP::GameAPP(){
-    // 实例化各个部分
-    window.resize(250, 150);
-    window.setWindowTitle("Simple Qt Application");
+    //window.resize(1024, 1024); // 设置初始大小，这里假设图片的分辨率为 800x600  
+    //window.setWindowTitle("Gold Miner"); // 设置窗口标题
 }
 GameAPP::~GameAPP(){
 }

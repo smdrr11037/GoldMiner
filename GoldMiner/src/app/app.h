@@ -6,11 +6,12 @@
 // #include "../viewmodel/ViewModel.h"
 // #include "../window/CompletePage.h"
 // #include "../window/StartPage.h"
+#include "../window/MainWindow.h"
 
 class GameAPP
 {
 private:
-    QWidget window;
+    MainWindow window;
 public:
     GameAPP();
     ~GameAPP();
