@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle("Gold Miner Initial Start");
     setCentralWidget(startPage);
 
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     
 
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle("This Level Victory");
     setCentralWidget(completePage);
 
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/victory_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/victory_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     */
     //===================================================================================
@@ -64,7 +64,7 @@ void MainWindow::handleStartButtonClicked()
     this->resize(592, 434);
     this->setWindowTitle("Running");
     setCentralWidget(runningPage);
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/running_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/running_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     // 发射信号通知 app 层,通知已改变状态完成  
     emit StartToRunGame(GameState::Running);
@@ -77,13 +77,13 @@ void MainWindow::handleExitButtonClicked()
     this->setWindowTitle("This Level Victory");
     setCentralWidget(completePage);
 
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/victory_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/victory_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     /*this->resize(1024, 1024);
     this->setWindowTitle("Gold Miner Start");
     //暂定直接返回开始界面
     setCentralWidget(startPage);
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/start_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     */
     // 发射信号通知 viewmodel 层  
@@ -97,7 +97,7 @@ void MainWindow::handleNextLevelButtonClicked()
     this->resize(592, 434);
     this->setWindowTitle("Next Level Running");
     setCentralWidget(runningPage);
-    QString imagePath = "D:/Assignment/Grade2.2/c++/GoldMiner/GoldMiner/src/window/image/running_background.jpg";
+    QString imagePath = " /mnt/e/cs/cpp/GoldMiner/GoldMiner/src/window/image/running_background.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     // 发射信号通知 viewmodel 层  
     emit CompleteToNextRun(GameState::Running);
