@@ -13,15 +13,21 @@
 #include <QObject>
 #include <vector>
 #include "../common/GoldMinerDef.h"
+#include "../viewmodel/ViewModel.h"
+
 class Model : public QObject
 {
     Q_OBJECT
 public:
     explicit Model(QObject *parent = nullptr);
+    virtual ~Model();
+    void init();                 // 每关初始化钩子、物块、游戏状态
+    void generateBlocks();       // 生成物块
 
 signals:
 
 public slots:
+
 
 private:
     int m_score;
