@@ -78,7 +78,7 @@ class Hook // 钩子的类
 {
 public:
     Hook(Position startPosition) : position(startPosition), isExtending(false) {}
-
+    double getAngle() const {return angle; }
     Position getPosition() const { return position; }
     bool getIsExtending() const { return isExtending; }
     void startExtending() { isExtending = true; }
@@ -100,7 +100,8 @@ enum class GameState // 游戏所处的页面
     Start,
     Running,
     Paused, // 后续可能增加暂停的功能
-    GameOver
+    Win, // 通关
+    GameOver // 失败
 };
 
 class IGameObserver // 观察者模式接口，ViewModel可以实现该接口来监听Model的变化
@@ -113,5 +114,31 @@ public:
 };
 
 
+class Model;// 模型类的前向声明，负责管理游戏的状态
+
+class Player // 玩家类
+{
+    friend class Model;  // Model 类可以访问 Player 类的私有成员和保护成员
+    
+    private:
+        int m_score;
+        int m_time;
+        int m_level;
+        int targetScore;// 目标分数
+    
+    public:
+        Player(int score=0, int time=0, int level=1, int targetscore=0) : 
+        m_score(score), m_time(time),  m_level(level) ,targetScore(targetscore){}
+        int getScore() const { return m_score; }
+        int getTime() const { return m_time; }
+        int getLevel() const { return m_level; }
+        int getTargetScore() const { return targetScore; }
+    
+    protected:
+        void setScore(int newScore) { m_score = newScore; }
+        void setLevel(int newlevel) { m_level = newlevel; }
+        void setTime(int newTime) { m_time = newTime; }
+        void setTargetScore(int newTargetScore) { targetScore = newTargetScore; }
+};
 
 #endif // GOLD_MINER_DEF_H

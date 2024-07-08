@@ -11,7 +11,9 @@
 class GameAPP
 {
 private:
-    MainWindow window;
+    MainWindow m_window;
+    // Model m_model;
+    // ViewModel m_viewModel;
 public:
     GameAPP();
     ~GameAPP();
