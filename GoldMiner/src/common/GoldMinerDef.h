@@ -6,6 +6,7 @@
 
 struct Position // 金块或者石块的位置
 {
+    Position(int ix, int iy):x(ix),y(iy){};
     int x;
     int y;
 };
@@ -24,7 +25,7 @@ public:
         return isGold;
     }
 
-    // 获取块的大小
+    // 获取块的大小（圆的半径）
     int getSize() const
     {
         return size;

@@ -8,6 +8,8 @@ GameAPP::GameAPP():m_window(nullptr){
     // connect(m_viewModel, &ViewModel::stateChanged, m_window, &MainWindow::updateState);
     // // 点击了 Start Game 按钮
     // connect(m_window, &MainWindow::startGame, m_viewModel, &ViewModel::handleStartGame);
+    // // 点击了 Exit Game 按钮，到达 GameOver 页面
+    // connect(m_window, &MainWindow::exitGame, m_viewModel, &ViewModel::handleExitGame);
     // // 点击 Next Level 按钮
     // connect(m_window, &MainWindow::nextLevel, m_viewModel, &ViewModel::handelNextLevel);
     // // 点击 Play Again 按钮（游戏失败时
