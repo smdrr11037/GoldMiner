@@ -10,8 +10,7 @@ StartPage::StartPage(QWidget* parent) : QWidget(parent)
     //roundButton->setGeometry(200, 200, 100, 100);  // 设置按钮的位置和大小  
     //roundButton->setStyleSheet("color: black; font-size: 16px;");
     startButton = new QPushButton("Start Game", this);
-    startButton->setStyleSheet("background-color: yellow; color: black; border-radius: 50px; padding: 50px 20px;");
-
+    startButton->setStyleSheet("background-color: yellow; color: orange;font-weight: bold;font-family: Arial; font-size: 40px; border-radius: 50px; padding: 30px 100px;");
     // 连接按钮的点击信号到槽函数  
     connect(startButton, &QPushButton::clicked, this, &StartPage::startButtonClicked);
 
