@@ -6,9 +6,14 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QStackedWidget>
+#include <QDir>
+#include <QCoreApplication> 
+#include <vector>
 #include "StartPage.h"  
 #include "RunningPage.h"  
 #include "CompletePage.h"
+#include "GameOver.h"
 #include "../common/GoldMinerDef.h"
 
 class MainWindow : public QMainWindow
@@ -21,22 +26,31 @@ public:
 
 //在槽函数中需要发射的信号
 signals:
-    void StartToRunGame(GameState gameState);
-    void RunToExit(GameState gameState);
-    void CompleteToNextRun(GameState gameState);
-//signals:这个应该是别的模块传来的信号，判断计时结束后是否通关
-//    void RunToCompleteGame(GameState gameState);
+    void refreshPageSignal(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
+    void startGame();
+    void exitGame();
+    void nextLevel();
+    void playAgain();
+    void pressKey();
 
 //槽函数
 private slots:
     void handleStartButtonClicked();
     void handleExitButtonClicked();
     void handleNextLevelButtonClicked();        //后续可带参数？哪一关
+    void handlePlayAgainButtonClicked();
+    void handlePressKey();          //RunningPage信号
+public slots:
+    void updatePage(const GameState& gameState);
+    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
+    //实际需要更多参数void runningRefreshPage(std::vector<Block> blocks, Hook hook, GameState gameState, Player player);
 
 private:
+    QStackedWidget* stackedWidget;
     StartPage* startPage;
     RunningPage* runningPage;
     CompletePage* completePage;
+    GameOver* gameOverPage;
 };
 
 #endif // MAINWINDOW_H 

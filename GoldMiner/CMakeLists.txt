@@ -12,6 +12,7 @@ SET(SRC_LIST "src/main.cpp"
 	"src/app/app.cpp"
 	"src/window/MainWindow.cpp"
 	"src/window/CompletePage.cpp"
+	"src/window/GameOver.cpp"
 	"src/window/StartPage.cpp"
 	"src/window/RunningPage.cpp"
 	)
