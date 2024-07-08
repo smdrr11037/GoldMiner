@@ -1,7 +1,7 @@
 #include "MainWindow.h"  
 #include <QVBoxLayout>
 #include <QMainWindow>  
-#include<QDebug>    //debug
+#include <QDebug>    //debug
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
