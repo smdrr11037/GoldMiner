@@ -13,6 +13,7 @@
 #include "StartPage.h"  
 #include "RunningPage.h"  
 #include "CompletePage.h"
+#include "GameOver.h"
 #include "../common/GoldMinerDef.h"
 
 class MainWindow : public QMainWindow
@@ -25,18 +26,23 @@ public:
 
 //在槽函数中需要发射的信号
 signals:
-    void StartToRunGame(GameState gameState);
-    void RunToExit(GameState gameState);
-    void CompleteToNextRun(GameState gameState);
-    void refreshPageSignal(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
+    void refreshPageSignal(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
+    void startGame();
+    void exitGame();
+    void nextLevel();
+    void playAgain();
+    void pressKey();
 
 //槽函数
 private slots:
     void handleStartButtonClicked();
     void handleExitButtonClicked();
     void handleNextLevelButtonClicked();        //后续可带参数？哪一关
-    void handlePassLevelSignal();
-    void runningRefreshPage(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
+    void handlePlayAgainButtonClicked();
+    void handlePressKey();          //RunningPage信号
+public slots:
+    void updatePage(const GameState& gameState);
+    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
     //实际需要更多参数void runningRefreshPage(std::vector<Block> blocks, Hook hook, GameState gameState, Player player);
 
 private:
@@ -44,6 +50,7 @@ private:
     StartPage* startPage;
     RunningPage* runningPage;
     CompletePage* completePage;
+    GameOver* gameOverPage;
 };
 
 #endif // MAINWINDOW_H 

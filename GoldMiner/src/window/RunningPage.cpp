@@ -54,7 +54,7 @@ void RunningPage::exitButtonClicked()
 }
 
 //TODO : 线的实现（Hook的getIsExtending()方法）
-void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState)
+void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook, const Player& player)
 {
     // 更新金块和石块的显示  
     for (const auto& block : blocks) {
@@ -96,7 +96,7 @@ void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook
 void RunningPage::keyPressEvent(QKeyEvent* event) {
     if (event->key() == Qt::Key_Down) {
         // 发射信号通知 app 层按键被按下  
-        emit hookKeyDown();
+        emit runningPressKey();
         //Debug
         Position p1, p2, p3, pH;
         p1.x = 300;
@@ -113,7 +113,7 @@ void RunningPage::keyPressEvent(QKeyEvent* event) {
         Hook hook = Hook(pH);
         GameState gameState = GameState::Running;
         //emit testSignal(blocks, hook, gameState);
-        refreshPage(blocks, hook, gameState);
+        //refreshPage(blocks, hook, gameState);
     }
     
     //QWidget::keyPressEvent(event);  // 调用基类的事件处理函数  
