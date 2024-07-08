@@ -6,8 +6,8 @@
 
 struct Position // 金块或者石块的位置
 {
-    int x;
-    int y;
+    double x;
+    double y;
 };
 
 class Block // 金块或者石块的结构体
@@ -49,7 +49,7 @@ public:
     }
 
     // 移动位置（增量）
-    void movePosition(int dx, int dy)
+    void movePosition(double dx, double dy)
     {
         position.x += dx;
         position.y += dy;
@@ -80,7 +80,7 @@ public:
     bool getIsExtending() const { return isExtending; }
     void startExtending() { isExtending = true; }
     void stopExtending() { isExtending = false; }
-    void updatePosition(int dx, int dy)
+    void updatePosition(double dx, double dy)
     {
         position.x += dx;
         position.y += dy;
