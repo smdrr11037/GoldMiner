@@ -3,9 +3,21 @@
 
 // 这里是一些全局变量的定义，比如游戏的一些参数，游戏的状态等。
 #include <iostream>
+#include <algorithm>
+#include <cmath>
 
 struct Position // 金块或者石块的位置
 {
+    Position(int x, int y):x(x), y(y){}
+    ~Position(){};
+    Position operator- (const Position &rhs) const
+    {
+        return Position(x - rhs.x, y - rhs.y);
+    }
+    double getDistance() const
+    {
+        return sqrt(x*x + y*y);
+    } 
     int x;
     int y;
 };
@@ -24,13 +36,9 @@ public:
         return isGold;
     }
 
-    /**
-     * @brief 获取块的大小
-     * 
-     */
-    int getSize() const
+    int getsize() const
     {
-        return size;
+        return size;;
     }
 
     // 获取块的价值
@@ -62,7 +70,7 @@ public:
     void printInfo() const
     {
         std::cout << "Block Info: " << (isGold ? "Gold" : "Stone")
-                  << ", Size: " << size
+                  << ", size: " << size
                   << ", Value: " << value
                   << ", Position: (" << position.x << ", " << position.y << ")\n";
     }
@@ -77,21 +85,31 @@ private:
 class Hook // 钩子的类
 {
 public:
-    Hook(Position startPosition) : position(startPosition), isExtending(false) {}
+    Hook(Position startPosition, double startAngle) : position(startPosition), angle(startAngle), isExtending(false) {}
     double getAngle() const {return angle; }
     Position getPosition() const { return position; }
     bool getIsExtending() const { return isExtending; }
     void startExtending() { isExtending = true; }
     void stopExtending() { isExtending = false; }
+    bool getIsRetracting() const { return isRetracting; }
+    void startRetracting() { isRetracting = true; }
+    void stopRetracting() { isRetracting = false; }
     void updatePosition(int dx, int dy)
     {
         position.x += dx;
         position.y += dy;
     }
+    void updateAngle(double theta)
+    {
+        angle += theta;
+        while(angle > 180.0) angle -= 180;
+        while(angle < 0.0) angle += 180;
+    }
 
 private:
     double angle; // 度数制表示的角度
     bool isExtending;
+    bool isRetracting;
     Position position;
 };
 

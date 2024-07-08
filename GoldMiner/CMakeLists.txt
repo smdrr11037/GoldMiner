@@ -7,7 +7,7 @@
 #	)
 SET(SRC_LIST "src/main.cpp"
 	# "src/model/Model.cpp"
-	# "src/viewmodel/ViewModel.cpp"
+	"src/viewmodel/ViewModel.cpp"
 	# "src/window/StatPage.cpp"
 	"src/app/app.cpp"
 	"src/window/MainWindow.cpp"

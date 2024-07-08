@@ -1,7 +1,7 @@
 #include "MainWindow.h"  
 #include <QVBoxLayout>
 #include <QMainWindow>  
-#include<QDebug>    //debug
+#include <QDebug>    //debug
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
@@ -102,3 +102,8 @@ void MainWindow::handleNextLevelButtonClicked()
     // 发射信号通知 viewmodel 层  
     emit CompleteToNextRun(GameState::Running);
 }
+
+// void MainWindow::handleFrameElapsed()
+// {
+//     qDebug() << "one Frame Elapsed";
+// }

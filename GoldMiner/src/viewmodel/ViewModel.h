@@ -5,15 +5,8 @@
 
 #include <QObject>
 #include <QTimer>
-#include <ctime>
 #include <chrono>
-#include <thread>
-#include <unistd.h>
-#include <mutex>
-#include <functional>
-#include <condition_variable>
-#include <atomic>
-#include "../common/etlbase.h"
+
 #include "../common/GoldMinerDef.h"
 #include "../model/Model.h"
 #include "../common/timer.h"
@@ -41,12 +34,19 @@ public:
     // void updateTargetScore(int targetScore);
 signals:
     void frameElapsed();
+    void startGame();
+    void nextLevel();
+    void stateChanged(GameState GameState);
+    void pageChanged(Hook& hook, std::vector<Block*>& blocks);
 
 public slots:
     void frameElapsedEmit();
+    void handleStartGame();
+    void handleNextLevel();
+    void updateState(GameState GameState);
+    void updatePage(Hook& hook, std::vector<Block*>& blocks);
 
 private:
-    int m_frameNumber;
     QTimer *m_pTimer;
 };
 
