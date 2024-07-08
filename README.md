@@ -83,3 +83,19 @@ tips: 本地切换到 CounterDemo 分支（即其他分支）的方法
 * 类名/文件名 - 帕斯卡（Pascal）命名法 `ReplacePart.cpp`
 * 成员变量名 - `m_replacePart`
 * .h 文件要加 `#ifndef` 等等
+
+## linux 编译运行
+
+1. g++ 版本 8.0 以上，有 c++17
+2. `sudo apt-get install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools` 安装 qt 库
+3. `sudo apt-get install build-essential` 检查一下依赖
+4. common 里删了 any.h 头文件，etlbase 里 types 改成 long，any（有上下两处） 改用 std 库
+5. CMakeLists.txt 中改用 cxx17
+6. 编译
+
+```sh
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+make
+```
