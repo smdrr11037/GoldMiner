@@ -14,6 +14,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QCoreApplication>
+#include <QTransform>
+#include <QKeyEvent>
 #include "../common/GoldMinerDef.h"
 class RunningPage : public QWidget
 {
@@ -21,11 +23,15 @@ class RunningPage : public QWidget
 
 public:
     explicit RunningPage(QWidget* parent = nullptr);
-
+    void keyPressEvent(QKeyEvent* event);
 signals:
     void exitGame(GameState gameState); // 退出游戏的信号  
+    void hookKeyDown();                 //下爪信号，emit给app层
+    void testSignal(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
 private slots:
     void exitButtonClicked(); // 退出按钮点击时的槽函数  
+public slots:
+    void refreshPage(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
 
 private:
     QLabel* scoreLabel;       // 分数显示的标签  

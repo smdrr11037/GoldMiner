@@ -9,6 +9,7 @@
 #include <QStackedWidget>
 #include <QDir>
 #include <QCoreApplication> 
+#include <vector>
 #include "StartPage.h"  
 #include "RunningPage.h"  
 #include "CompletePage.h"
@@ -27,14 +28,16 @@ signals:
     void StartToRunGame(GameState gameState);
     void RunToExit(GameState gameState);
     void CompleteToNextRun(GameState gameState);
-//signals:这个应该是别的模块传来的信号，判断计时结束后是否通关
-//    void RunToCompleteGame(GameState gameState);
+    void refreshPageSignal(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
 
 //槽函数
 private slots:
     void handleStartButtonClicked();
     void handleExitButtonClicked();
     void handleNextLevelButtonClicked();        //后续可带参数？哪一关
+    void handlePassLevelSignal();
+    void runningRefreshPage(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
+    //实际需要更多参数void runningRefreshPage(std::vector<Block> blocks, Hook hook, GameState gameState, Player player);
 
 private:
     QStackedWidget* stackedWidget;

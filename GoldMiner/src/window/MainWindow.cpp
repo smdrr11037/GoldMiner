@@ -38,10 +38,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     // 连接 Complete 的 nextLevel 信号到 MainWindow 的槽函数  
     connect(completePage, &CompletePage::nextLevel, this, &MainWindow::handleNextLevelButtonClicked);
 
-    //TODO : 
-    //连接 RunningPage 的 
-    //别的模块发来的 “通关” 信号到 MainWindow 的槽函数  
-    //connect(completePage, &CompletePage::nextLevel, this, &MainWindow::handleNextLevelButtonClicked);
+    connect(this, &MainWindow::refreshPageSignal, runningPage, &RunningPage::refreshPage);
 }
 
 MainWindow::~MainWindow() {
@@ -62,10 +59,11 @@ MainWindow::~MainWindow() {
 // 处理“开始”按钮点击的槽函数  
 void MainWindow::handleStartButtonClicked()
 {
-    this->resize(592, 434);
+    this->move(500, 100);
+    this->resize(2527, 1862);
     this->setWindowTitle("Running");
     stackedWidget->setCurrentIndex(1);
-    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/running_background.jpg";
+    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/back2527x1862.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     // 发射信号通知 app 层,通知已改变状态完成  
     emit StartToRunGame(GameState::Running);
@@ -74,6 +72,7 @@ void MainWindow::handleStartButtonClicked()
 // 处理 游戏中“退出”按钮点击的槽函数  
 void MainWindow::handleExitButtonClicked()
 {
+    this->move(1250, 500);
     this->resize(1100, 799);
     this->setWindowTitle("This Level Victory");
     stackedWidget->setCurrentIndex(2);
@@ -95,12 +94,29 @@ void MainWindow::handleExitButtonClicked()
 // 处理 游戏结束后comp界面“下一关”按钮点击后，进入下一关RunningPage的槽函数  
 void MainWindow::handleNextLevelButtonClicked()
 {
-    this->resize(592, 434);
+    this->move(500, 100);
+    this->resize(2527, 1862);
     this->setWindowTitle("Next Level Running");
     stackedWidget->setCurrentIndex(1);
 
-    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/running_background.jpg";
+    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/back2527x1862.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
     // 发射信号通知 viewmodel 层  
     emit CompleteToNextRun(GameState::Running);
+}
+
+void MainWindow::handlePassLevelSignal()
+{
+    this->move(1250, 500);
+    this->resize(1100, 799);
+    this->setWindowTitle("This Level Victory");
+    stackedWidget->setCurrentIndex(2);
+
+    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/victory_background.jpg";
+    setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
+}
+
+void MainWindow::runningRefreshPage(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState)
+{
+    emit refreshPageSignal(blocks, hook, gameState);
 }

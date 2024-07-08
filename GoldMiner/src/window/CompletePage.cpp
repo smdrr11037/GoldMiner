@@ -14,7 +14,7 @@ CompletePage::CompletePage(QWidget* parent) : QWidget(parent)
 
     // 创建进入下一关按钮  
     nextLevelButton = new QPushButton("Next Level", this);
-    nextLevelButton->setStyleSheet("background-color: white; color: black; border-radius: 50px; padding: 50px 100px;");
+    nextLevelButton->setStyleSheet("background-color: blue; color: white;font-weight: bold;font-family: Arial; font-size: 40px; border-radius: 50px; padding: 30px 100px;");
 
     // 连接按钮的点击信号到槽函数  
     connect(nextLevelButton, &QPushButton::clicked, this, &CompletePage::nextLevelButtonClicked);
