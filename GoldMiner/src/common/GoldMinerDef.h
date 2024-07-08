@@ -6,8 +6,9 @@
 
 struct Position // 金块或者石块的位置
 {
-    double x;
-    double y;
+    Position(int ix, int iy):x(ix),y(iy){};
+    int x;
+    int y;
 };
 
 class Block // 金块或者石块的结构体
@@ -24,7 +25,7 @@ public:
         return isGold;
     }
 
-    // 获取块的大小
+    // 获取块的大小（圆的半径）
     int getSize() const
     {
         return size;
@@ -49,7 +50,7 @@ public:
     }
 
     // 移动位置（增量）
-    void movePosition(double dx, double dy)
+    void movePosition(int dx, int dy)
     {
         position.x += dx;
         position.y += dy;
@@ -80,7 +81,7 @@ public:
     bool getIsExtending() const { return isExtending; }
     void startExtending() { isExtending = true; }
     void stopExtending() { isExtending = false; }
-    void updatePosition(double dx, double dy)
+    void updatePosition(int dx, int dy)
     {
         position.x += dx;
         position.y += dy;
