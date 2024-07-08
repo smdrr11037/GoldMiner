@@ -98,15 +98,7 @@ void RunningPage::keyPressEvent(QKeyEvent* event) {
         // 发射信号通知 app 层按键被按下  
         emit runningPressKey();
         //Debug
-        Position p1, p2, p3, pH;
-        p1.x = 300;
-        p1.y = 1200;
-        p2.x = 600;
-        p2.y = 1600;
-        p3.x = 900;
-        p3.y = 1400; 
-        pH.x = 1200;
-        pH.y = 460;
+        Position p1(300,1200), p2(600,1600), p3(900,1400), pH(1200,460);
         std::vector<Block> initialBlocks = { Block(true, 0, 0, p1), Block(false, 0, 0, p2), Block(true, 0, 0, p3) };
         // 使用引用来绑定到这个向量  
         std::vector<Block>& blocks = initialBlocks;
