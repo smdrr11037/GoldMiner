@@ -1,9 +1,6 @@
-> （目前只有空文件呢，非常抱歉还没弄清楚
->
-> 在最开始完全知道接口是怎么样的对我来说好像有点困难，于是决定先做一个计数器 demo，理解交互原理
+> 最近一次更新：app 层增加接口说明，common 层增加一个 Player 类
 
 ## 开发环境需求
-
 
 * Visual Stdio 2022
 * Qt 5.14.2
@@ -27,12 +24,11 @@ MSBuild ALL_BUILD.vcxproj /t:build /p:Configuration=Debug
 
 * 找不到 Qt.cmake（类似的名字
 
-   * 在最上层的 CMakeList.txt 增加语句（你自己的相应路径） `set(CMAKE_PREFIX_PATH D:/Qt/Qt5.14.2/5.14.2/msvc2017_64/lib/cmake/Qt5)`
-
+  * 在最上层的 CMakeList.txt 增加语句（你自己的相应路径） `set(CMAKE_PREFIX_PATH D:/Qt/Qt5.14.2/5.14.2/msvc2017_64/lib/cmake/Qt5)`
 * 运行 .exe 文件找不到 *.dll
-  
+
   * 增加如图所示的环境变量（用户变量） PATH
-   ![1720081886589](image/README/1720081886589.png)
+    ![1720081886589](image/README/1720081886589.png)
 
 ## git 规范
 
@@ -42,8 +38,7 @@ MSBuild ALL_BUILD.vcxproj /t:build /p:Configuration=Debug
 * 等待当前组长审核，通过后 github 会发邮件通知大家拉取新的代码
 * 不需要删除旧分支，一个人的改动固定提交到该分支即可
 
---------
-
+---
 
 ```mermaid
 gitGraph
