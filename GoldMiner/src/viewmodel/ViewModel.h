@@ -8,7 +8,6 @@
 #include <chrono>
 
 #include "../common/GoldMinerDef.h"
-#include "../model/Model.h"
 #include "../common/timer.h"
 
 #define FrameNumber 30
@@ -35,16 +34,16 @@ public:
 signals:
     void frameElapsed();
     void startGame();
-    void nextLevel();
-    void stateChanged(GameState GameState);
-    void pageChanged(Hook& hook, std::vector<Block*>& blocks);
+    void exitGame();
+    void pageChanged(const GameState &GameState);
+    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
 
 public slots:
     void frameElapsedEmit();
     void handleStartGame();
-    void handleNextLevel();
-    void updateState(GameState GameState);
-    void updatePage(Hook& hook, std::vector<Block*>& blocks);
+    void handleExitGame();
+    void updatePage(GameState &GameState);
+    void updateState(std::vector<Block>& blocks, Hook& hook, Player &player);
 
 private:
     QTimer *m_pTimer;

@@ -3,16 +3,13 @@
 
 Model::Model(QObject *parent)
 {
-
+    
 }
 
 Model::~Model()
 {
     delete m_hook;
-    for(auto block: m_blocks)
-    {
-        delete block;
-    }
+    delete m_player;
 }
 
 void Model::updateHook()
@@ -33,7 +30,7 @@ void Model::updateHook()
     }  
 
     qDebug() << "updateHook";
-    emit pageChanged(*m_hook, m_blocks);
+    emit stateChanged(m_blocks, *m_hook, *m_player);
 }
 
 void Model::startExtending()
@@ -41,12 +38,12 @@ void Model::startExtending()
     extendHook();
 }
 
-void Model::nextLevel()
+void Model::exitGame()
 {
     m_gameState = GameState::GameOver;
 
     qDebug() << "Model state change to nextLevel";
-    emit stateChanged(m_gameState);
+    emit pageChanged(m_gameState);
 }
 
 void Model::startGame()
@@ -55,7 +52,7 @@ void Model::startGame()
     m_level = 1;
     init();
     qDebug() << "Model state change to start";
-    emit stateChanged(m_gameState);
+    emit pageChanged(m_gameState);
 }
 
 void Model::init()
@@ -64,6 +61,7 @@ void Model::init()
     targetScore = 1000;
     generateBlocks();
     m_hook = new Hook(Position(0, 0), 0.0);
+    m_player = new Player();
 }
 
 /**
@@ -98,7 +96,7 @@ bool Model::checkCollision()
     Position pHook = m_hook->getPosition();
     for(auto block: m_blocks)
     {
-        Position p = block->getPosition() - pHook;
+        Position p = block.getPosition() - pHook;
         
     }
 }
