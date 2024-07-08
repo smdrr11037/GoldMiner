@@ -13,7 +13,6 @@
 #include <QDebug>
 #include <vector>
 #include "../common/GoldMinerDef.h"
-#include "../viewmodel/ViewModel.h"
 
 #define MOVEMENT_PER_FRAME 150.0f
 #define PI 3.1415926f
@@ -36,20 +35,20 @@ public:
 
 
 signals:
-    void pageChanged(Hook& hook, std::vector<Block*>& blocks);
-    void stateChanged(GameState gameState);
+    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
+    void pageChanged(const GameState &gameState);
 
 public slots:
     void updateHook();          // 每帧更新钩子位置(旋转或伸长或收回)
     void startExtending();      // 开始伸长钩子
     void startGame();           // 开始游戏
-    void nextLevel();            // 退出游戏
+    void exitGame();           // 退出游戏
 
 private:
     int m_score;
     int targetScore;
     Hook *m_hook;                 // 钩子
-    std::vector<Block*> m_blocks; // 存储所有块的集合
+    std::vector<Block> m_blocks; // 存储所有块的集合
     GameState m_gameState;       // 游戏状态
     int m_level;                 // 等级
     Player *m_player;

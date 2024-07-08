@@ -16,20 +16,20 @@ void ViewModel::handleStartGame()
     m_pTimer->start();
     emit startGame();
 }
-void ViewModel::handleNextLevel()
+void ViewModel::handleExitGame()
 {
     m_pTimer->stop();
-    emit nextLevel();
+    emit exitGame();
 }
 void ViewModel::frameElapsedEmit()
 {
     emit frameElapsed();
 }
-void ViewModel::updatePage(Hook& hook, std::vector<Block*>& blocks)
+void ViewModel::updateState(std::vector<Block>& blocks, Hook& hook, Player &player)
 {
-    emit pageChanged(hook, blocks);
+    emit stateChanged(blocks, hook, player);
 }
-void ViewModel::updateState(GameState GameState)
+void ViewModel::updatePage(GameState &GameState)
 {
-    emit stateChanged(GameState);
+    emit pageChanged(GameState);
 }

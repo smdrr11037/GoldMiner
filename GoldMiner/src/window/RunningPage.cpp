@@ -102,7 +102,7 @@ void RunningPage::keyPressEvent(QKeyEvent* event) {
         std::vector<Block> initialBlocks = { Block(true, 0, 0, p1), Block(false, 0, 0, p2), Block(true, 0, 0, p3) };
         // 使用引用来绑定到这个向量  
         std::vector<Block>& blocks = initialBlocks;
-        Hook hook = Hook(pH);
+        Hook hook = Hook(pH, 0.0);
         GameState gameState = GameState::Running;
         //emit testSignal(blocks, hook, gameState);
         //refreshPage(blocks, hook, gameState);
