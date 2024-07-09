@@ -5,7 +5,7 @@ GameOver::GameOver(QWidget* parent) : QWidget(parent)
 {
     // 创建重玩按钮  
     replayLevelButton = new QPushButton("Replay This Level", this);
-    replayLevelButton->setStyleSheet("background-color: blue; color: white;font-weight: bold;font-family: Arial; font-size: 40px; border-radius: 50px; padding: 30px 100px;");
+    replayLevelButton->setStyleSheet("background-color: yellow; color: orange;font-weight: bold;font-family: Arial; font-size: 40px; border-radius: 50px; padding: 30px 100px;");
 
     // 连接按钮的点击信号到槽函数  
     connect(replayLevelButton, &QPushButton::clicked, this, &GameOver::replayButtonClicked);

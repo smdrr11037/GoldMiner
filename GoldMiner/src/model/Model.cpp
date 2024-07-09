@@ -99,13 +99,16 @@ bool Model::checkCollision()
         Position p = block.getPosition() - pHook;
         
     }
+    return false;
 }
 
 bool Model::checkOutOfBound()
 {
+    return false;
 
 }
 void Model::generateBlocks()
 {
+
 
 }
