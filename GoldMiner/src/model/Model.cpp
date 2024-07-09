@@ -9,6 +9,8 @@ Model::Model(QObject *parent)
 
 Model::~Model()
 {
+    if(m_hook != nullptr) delete m_hook;
+    if(m_player != nullptr) delete m_player;
 }
 
 // 槽函数
@@ -26,10 +28,15 @@ void Model::checkHookState()
         qDebug() << "Hook catch a block!";
     }
     else if(m_hook->getIsRetracting() && m_hook->getPosition().getDistance() <= HOOK_INIT_LENGTH){
-        qDebug() << "Block get daze!";
         m_hook->stopRetracting();
         m_hook->reset();
         if(m_collidedBlock != nullptr){
+            qDebug() << "Block get daze!";
+            qDebug() << "Gold?" << m_collidedBlock->isGoldBlock();
+            qDebug() << "Size" << m_collidedBlock->getSize();
+            qDebug() << "Value" << m_collidedBlock->getValue();
+            qDebug() << "Position (" << m_collidedBlock->getPosition().x << ',' << m_collidedBlock->getPosition().y << ')'; 
+
             updatePlayerScore();
             for(auto it_block=m_blocks.begin(); it_block != m_blocks.end(); it_block++){
                 if(&*it_block == m_collidedBlock){
@@ -37,6 +44,7 @@ void Model::checkHookState()
                     break;
                 }
             }
+            qDebug() << m_blocks.size() << "block left"; 
         }
         m_collidedBlock = nullptr;
     }
@@ -53,41 +61,38 @@ void Model::startExtending()
 void Model::exitGame()
 {
     if(m_player->getScore() >= m_player->getTargetScore()) {
-        m_gameState = GameState::Win;
+        emit winGame();
         qDebug() << "Model state change to Win";
     }
     else{
-        m_gameState = GameState::GameOver;
+        emit loseGame();
         qDebug() << "Model state change to GameOver";
     }
+    m_collidedBlock = nullptr;
+    m_blocks.clear();
     delete m_hook;
     delete m_player;
-    emit pageChanged(m_gameState);
+    m_hook = nullptr;
+    m_player = nullptr;
 }
 
 void Model::startGame()
 {
-    m_gameState = GameState::Running;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 void Model::playAgain()
 {
-    m_gameState = GameState::Running;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 void Model::nextLevel()
 {
-    m_gameState = GameState::Running;
     m_level++;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 //成员函数
@@ -95,8 +100,17 @@ void Model::nextLevel()
 void Model::init()
 {
     generateBlocks();
+    qDebug() << "Block number:" << m_blocks.size();
+    for(auto block: m_blocks){
+        qDebug() << "----------";
+        qDebug() << "Gold?" << block.isGoldBlock();
+        qDebug() << "Size" << block.getSize();
+        qDebug() << "Value" << block.getValue();
+        qDebug() << "Position (" << block.getPosition().x << ',' << block.getPosition().y << ')'; 
+    }
+
     m_hook = new Hook(HOOK_ANGLE_MIN);
-    m_player = new Player(0, 25, m_level, 650);
+    m_player = new Player(0, 45, m_level, 300);
     m_frameNumber = 0;
     m_collidedBlock = nullptr;
 }
@@ -113,12 +127,15 @@ void Model::updateHookAngle(double angle)
 
 void Model::extendHook()
 {
-    qDebug() << "Hook extending!";
-    m_hook->startExtending();
+    if(!m_hook->getIsExtending() && !m_hook->getIsRetracting()){
+        qDebug() << "Hook extending!";
+        m_hook->startExtending();
+    }
 }
 
 void Model::retractHook()
 {
+    assert(m_hook->getIsExtending() && !m_hook->getIsRetracting());
     m_hook->stopExtending();
     m_hook->startRetracting();
 }
@@ -170,7 +187,7 @@ void Model::updateHook()
     else if(m_hook->getIsRetracting()){
         double dx, dy;
         if(m_collidedBlock != nullptr){
-            double rate = m_collidedBlock->getSize() / GOLD_SMALL_SIZE;
+            double rate = m_collidedBlock->getSize() / g_goldSize[0];
             dx = -RETRACTING_PER_FRAME * cos(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             dy = -RETRACTING_PER_FRAME * sin(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             updateBlockPosition(dx, dy);
@@ -210,7 +227,40 @@ void Model::showInfo()
 
 void Model::generateBlocks()
 {
-    Position p(100.0f, 600.0f);
-    Block a(true, GOLD_LARGE_SIZE, GOLD_LARGE_VALUE, p);
-    m_blocks.push_back(a);
+    // Position p(100.0f, 600.0f);
+    // Block a(true, GOLD_LARGE_SIZE, GOLD_LARGE_VALUE, p);
+    // m_blocks.push_back(a);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> blockNum(BLOCK_NUMBER_MIN, BLOCK_NUMBER_MAX);
+    std::uniform_real_distribution<double> disY(BLOCK_Y_MIN, BLOCK_Y_MAX);
+    std::uniform_real_distribution<double> disX(BLOCK_X_MIN, BLOCK_X_MAX);
+    std::uniform_int_distribution<int> blockType(0, 1);
+    std::uniform_int_distribution<int> blockSize(0, 2);
+    int n = blockNum(gen);
+    while(m_blocks.size() < n){
+        double x = disX(gen);
+        double y = disY(gen);
+        bool isGold = (blockType(gen) == 1);
+        int sizeChoose = blockSize(gen);
+        double size = isGold ? g_goldSize[sizeChoose] : g_stoneSize[sizeChoose];
+        int value = isGold ? g_goldValue[sizeChoose] : g_stoneValue[sizeChoose];
+        if(x > y/tan(DEGREES_TO_RADIANS(HOOK_ANGLE_MIN)) || x < y/tan(DEGREES_TO_RADIANS(HOOK_ANGLE_MAX))) {
+            continue;
+        }
+        Position p(x, y);
+        bool flag = true;
+        for(auto block: m_blocks){
+            double dis = (p-block.getPosition()).getDistance();
+            if(dis < (size+block.getSize())) {
+                flag = false;
+                break;
+            }
+        }
+        if(!flag) continue;
+        else{
+            Block b(isGold, size, value, p);
+            m_blocks.push_back(b);
+        }
+    }
 }
