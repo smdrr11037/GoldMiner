@@ -8,9 +8,7 @@ GameAPP::GameAPP(){
 
     //:m_model(),m_viewModel())
     // 用 QObject::connect 实现 view 和 view model 层的数据绑定
-    QObject::connect(m_viewModel, &ViewModel::winGame, m_model, &Model::startGame);
-    QObject::connect(m_viewModel, &ViewModel::loseGame, m_model, &Model::exitGame);
-    
+
     // // 需要转换页面，传递参数 GameState
     // // 游戏中，每帧刷新，传递参数 const vector<Block>& m_block、const &m_hook、const &m_player
     QObject::connect(m_viewModel, &ViewModel::stateChanged, m_window, &MainWindow::updateState);
@@ -24,6 +22,7 @@ GameAPP::GameAPP(){
     QObject::connect(m_window, &MainWindow::playAgain, m_viewModel, &ViewModel::handlePlayAgain);
     // // 玩家按下键盘，伸长钩子
     QObject::connect(m_window, &MainWindow::pressKey, m_viewModel, &ViewModel::handlePressKey);
+    QObject::connect(m_window, &MainWindow::timeOut, m_viewModel, &ViewModel::handleTimeOut);
 }
 GameAPP::~GameAPP(){
 }
