@@ -19,31 +19,13 @@
 #define SCREEN_Y_BOUND 865
 #define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
 
-#define BLOCK_NUMBER_MIN 5
-#define BLOCK_NUMBER_MAX 10
-#define BLOCK_Y_MIN 300
-#define BLOCK_Y_MAX (SCREEN_Y_BOUND)
-#define BLOCK_X_MIN (-SCREEN_X_BOUND)
-#define BLOCK_X_MAX (SCREEN_X_BOUND)
 
-// #define GOLD_SMALL_SIZE 30.0f
-// #define GOLD_MIDDLE_SIZE 50.0f
-// #define GOLD_LARGE_SIZE 150.0f
-// #define GOLD_SMALL_VALUE 50
-// #define GOLD_MIDDLE_VALUE 100
-// #define GOLD_LARGE_VALUE 500
-
-// #define STONE_SMALL_SIZE 50.0f
-// #define STONE_MIDDLE_SIZE 100.0f
-// #define STONE_LARGE_SIZE 160.0f
-// #define STONE_SMALL_VALUE 33
-// #define STONE_MIDDLE_VALUE 60
-// #define STONE_LARGE_VALUE 90
-
-const int g_goldValue[3] = { 50, 100, 500 };
-const double g_goldSize[3] = { 30.0f, 50.0f, 150.0f};
-const int g_stoneValue[3] = { 33, 60, 90 };
-const double g_stoneSize[3] = { 50.0f, 100.0f, 160.0f };
+enum class BlockSize
+{
+    Small,
+    Middle,
+    Large
+};
 
 
 struct Position // 金块或者石块的位置
@@ -216,22 +198,9 @@ private:
     Position position;
 };
 
-enum class GameState // 游戏所处的页面
-{
-    Start,
-    Running,
-    Paused, // 后续可能增加暂停的功能
-    Win, // 通关
-    GameOver // 失败
-};
-
-
-class Model;// 模型类的前向声明，负责管理游戏的状态
 
 class Player // 玩家类
-{
-    friend class Model;  // Model 类可以访问 Player 类的私有成员和保护成员
-    
+{   
     private:
         int m_score;
         int m_time;
@@ -245,12 +214,22 @@ class Player // 玩家类
         int getTime() const { return m_time; }
         int getLevel() const { return m_level; }
         int getTargetScore() const { return targetScore; }
-    
-    protected:
         void setScore(int newScore) { m_score = newScore; }
         void setLevel(int newlevel) { m_level = newlevel; }
         void setTime(int newTime) { m_time = newTime; }
         void setTargetScore(int newTargetScore) { targetScore = newTargetScore; }
 };
+
+struct GameData {
+    std::vector<Block> blockVector;
+    std::shared_ptr<Hook> hook;
+    std::shared_ptr<Player> player;
+};
+
+// 用法（没写构造函数时
+// std::shared_ptr<Hook> hook = std::make_shared<Hook>(Position{0, 0}, 45.0);
+// 初始化其他对象 ...
+// std::shared_ptr<GameData> gameData = std::make_shared<GameData>(GameData{blocks, hook, player});
+// 只需要把 gameData 暴露和获取即可
 
 #endif // GOLD_MINER_DEF_H

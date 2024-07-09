@@ -2,54 +2,41 @@
 #include <QDebug>
 ViewModel::ViewModel(QObject *parent)
 {
-    std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::seconds(1))/FRAME_NUMBER;
-    m_pTimer = new QTimer();
-    m_pTimer->setInterval(ms.count());
-    connect(m_pTimer, &QTimer::timeout, this, &ViewModel::frameElapsedEmit);
+    m_model = new Model(nullptr);
+    connect(m_model, &Model::winGame, this, &ViewModel::winGame);
+    connect(m_model, &Model::loseGame, this, &ViewModel::loseGame);
+    connect(m_model, &Model::stateChanged, this, &ViewModel::updateState);
 }
-
-
 // slot function
-void ViewModel::frameElapsedEmit()
-{
-    emit frameElapsed();
-}
+
 // from view
+void ViewModel::handleTimeOut()
+{
+    m_model->checkHookState();
+}
 void ViewModel::handleStartGame()
 {
-    emit startGame();
+    m_model->startGame();
 }
 void ViewModel::handleExitGame()
 {
-    emit exitGame();
+    m_model->exitGame();
 }
 void ViewModel::handlePlayAgain()
 {
-    emit playAgain();
-}
-void ViewModel::handlePressKey()
-{
-    emit pressKey();
+    m_model->playAgain();
 }
 void ViewModel::handleNextLevel()
 {
-    emit nextLevel();
+    m_model->nextLevel();
 }
+void ViewModel::handlePressKey()
+{
+    m_model->extendHook();
+}
+
 // from model
 void ViewModel::updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player)
 {
     emit stateChanged(blocks, hook, player);
-}
-void ViewModel::updatePage(const GameState &GameState)
-{
-    if(GameState != GameState::Running)
-    {
-        qDebug() << "game over";
-        m_pTimer->stop();
-    }
-    else{
-        qDebug() << "game running";
-        m_pTimer->start();
-    }
-    emit pageChanged(GameState);
 }

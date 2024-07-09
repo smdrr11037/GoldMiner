@@ -3,7 +3,6 @@
 
 Model::Model(QObject *parent)
 {
-    m_gameState = GameState::Start;
     m_level = 1;
 }
 
@@ -61,11 +60,11 @@ void Model::startExtending()
 void Model::exitGame()
 {
     if(m_player->getScore() >= m_player->getTargetScore()) {
-        m_gameState = GameState::Win;
+        emit winGame();
         qDebug() << "Model state change to Win";
     }
     else{
-        m_gameState = GameState::GameOver;
+        emit loseGame();
         qDebug() << "Model state change to GameOver";
     }
     m_collidedBlock = nullptr;
@@ -74,32 +73,25 @@ void Model::exitGame()
     delete m_player;
     m_hook = nullptr;
     m_player = nullptr;
-    emit pageChanged(m_gameState);
 }
 
 void Model::startGame()
 {
-    m_gameState = GameState::Running;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 void Model::playAgain()
 {
-    m_gameState = GameState::Running;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 void Model::nextLevel()
 {
-    m_gameState = GameState::Running;
     m_level++;
     init();
     qDebug() << "Model state change to Running";
-    emit pageChanged(m_gameState);
 }
 
 //成员函数
