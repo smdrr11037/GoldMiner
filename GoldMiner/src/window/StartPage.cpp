@@ -24,5 +24,5 @@ StartPage::StartPage(QWidget* parent) : QWidget(parent)
 void StartPage::startButtonClicked()
 {
     // 发射信号，将游戏状态切换为 Running  
-    emit startGame(GameState::Running);
+    emit startGame();
 }

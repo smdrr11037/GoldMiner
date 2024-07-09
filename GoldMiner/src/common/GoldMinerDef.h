@@ -19,7 +19,6 @@
 #define SCREEN_Y_BOUND 865
 #define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
 
-
 struct Position // 金块或者石块的位置
 {
     Position(){ x=0, y=0; }
@@ -190,22 +189,9 @@ private:
     Position position;
 };
 
-enum class GameState // 游戏所处的页面
-{
-    Start,
-    Running,
-    Paused, // 后续可能增加暂停的功能
-    Win, // 通关
-    GameOver // 失败
-};
-
-
-class Model;// 模型类的前向声明，负责管理游戏的状态
 
 class Player // 玩家类
-{
-    friend class Model;  // Model 类可以访问 Player 类的私有成员和保护成员
-    
+{   
     private:
         int m_score;
         int m_time;
@@ -219,12 +205,22 @@ class Player // 玩家类
         int getTime() const { return m_time; }
         int getLevel() const { return m_level; }
         int getTargetScore() const { return targetScore; }
-    
-    protected:
         void setScore(int newScore) { m_score = newScore; }
         void setLevel(int newlevel) { m_level = newlevel; }
         void setTime(int newTime) { m_time = newTime; }
         void setTargetScore(int newTargetScore) { targetScore = newTargetScore; }
 };
+
+struct GameData {
+    std::vector<Block> blockVector;
+    std::shared_ptr<Hook> hook;
+    std::shared_ptr<Player> player;
+};
+
+// 用法（没写构造函数时
+// std::shared_ptr<Hook> hook = std::make_shared<Hook>(Position{0, 0}, 45.0);
+// 初始化其他对象 ...
+// std::shared_ptr<GameData> gameData = std::make_shared<GameData>(GameData{blocks, hook, player});
+// 只需要把 gameData 暴露和获取即可
 
 #endif // GOLD_MINER_DEF_H

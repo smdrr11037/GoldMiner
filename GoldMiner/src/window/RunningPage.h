@@ -34,7 +34,7 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void refreshPage(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
 signals:
-    void exitGame(GameState gameState); // 退出游戏的信号  
+    void exitGame(); // 退出游戏的信号  
     void hookKeyDown();                 //下爪信号，emit给app层
     //void testSignal(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
     void runningPressKey();

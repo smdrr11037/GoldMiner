@@ -20,7 +20,7 @@
 #define RETRACTING_PER_SECOND 425.0f
 #define RETRACTING_PER_FRAME (RETRACTING_PER_SECOND/FRAME_NUMBER)
 
-#define SECONDS_PER_SWING 2.1f
+#define SECONDS_PER_SWING 3.1f
 #define DEGREE_CHANGE_PER_FRAME (HOOK_ANGLE_RANGE/(SECONDS_PER_SWING*FRAME_NUMBER)) 
 
 #define BLOCK_NUMBER_MIN 5
@@ -74,7 +74,6 @@ private:
     int m_level;
     Hook *m_hook;                // 钩子
     std::vector<Block> m_blocks; // 存储所有块的集合
-    GameState m_gameState;       // 游戏状态
     Player *m_player;
     Block *m_collidedBlock;      // 捕获的物块  
 };
