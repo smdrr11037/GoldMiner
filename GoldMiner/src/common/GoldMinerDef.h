@@ -19,26 +19,6 @@
 #define SCREEN_Y_BOUND 865
 #define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
 
-#define BLOCK_NUMBER_MIN 5
-#define BLOCK_NUMBER_MAX 10
-#define BLOCK_Y_MIN 300
-#define BLOCK_Y_MAX (SCREEN_Y_BOUND)
-#define BLOCK_X_MIN (-SCREEN_X_BOUND)
-#define BLOCK_X_MAX (SCREEN_X_BOUND)
-
-#define GOLD_SMALL_SIZE 30.0f
-#define GOLD_MIDDLE_SIZE 50.0f
-#define GOLD_LARGE_SIZE 150.0f
-#define GOLD_SMALL_VALUE 50
-#define GOLD_MIDDLE_VALUE 100
-#define GOLD_LARGE_VALUE 500
-
-#define STONE_SMALL_SIZE 50.0f
-#define STONE_MIDDLE_SIZE 100.0f
-#define STONE_LARGE_SIZE 160.0f
-#define STONE_SMALL_VALUE 33
-#define STONE_MIDDLE_VALUE 60
-#define STONE_LARGE_VALUE 90
 
 enum class BlockSize
 {
@@ -218,22 +198,9 @@ private:
     Position position;
 };
 
-enum class GameState // 游戏所处的页面
-{
-    Start,
-    Running,
-    Paused, // 后续可能增加暂停的功能
-    Win, // 通关
-    GameOver // 失败
-};
-
-
-class Model;// 模型类的前向声明，负责管理游戏的状态
 
 class Player // 玩家类
-{
-    friend class Model;  // Model 类可以访问 Player 类的私有成员和保护成员
-    
+{   
     private:
         int m_score;
         int m_time;
@@ -247,12 +214,19 @@ class Player // 玩家类
         int getTime() const { return m_time; }
         int getLevel() const { return m_level; }
         int getTargetScore() const { return targetScore; }
-    
-    protected:
         void setScore(int newScore) { m_score = newScore; }
         void setLevel(int newlevel) { m_level = newlevel; }
         void setTime(int newTime) { m_time = newTime; }
         void setTargetScore(int newTargetScore) { targetScore = newTargetScore; }
+};
+
+struct GameData {
+    std::vector<Block> m_block;
+    Hook m_hook;
+    Player m_player;
+
+    // 构造函数
+    GameData(){}
 };
 
 #endif // GOLD_MINER_DEF_H
