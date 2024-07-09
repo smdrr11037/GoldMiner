@@ -8,8 +8,7 @@
 #include <chrono>
 
 #include "../common/GoldMinerDef.h"
-#include "../common/timer.h"
-
+#include "../model/Model.h"
 
 class ViewModel : public QObject
 {
@@ -19,15 +18,9 @@ public:
     virtual ~ViewModel(){};
 
 signals:
-// To Model
-    void frameElapsed();
-    void startGame();
-    void exitGame();
-    void playAgain();
-    void nextLevel();
-    void pressKey();
 // To View
-    void pageChanged(const GameState &GameState);
+    void winGame();
+    void loseGame();
     void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
 
 public slots:
@@ -38,13 +31,11 @@ public slots:
     void handlePlayAgain();
     void handleNextLevel();
     void handlePressKey();
-    // from Model
-    void updatePage(const GameState &GameState);
-    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player);
-    
 
+    // from Model
+    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player);
 private:
-    QTimer *m_pTimer;
+    Model *m_model;
 };
 
 

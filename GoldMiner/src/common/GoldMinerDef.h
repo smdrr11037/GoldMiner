@@ -19,32 +19,6 @@
 #define SCREEN_Y_BOUND 865
 #define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
 
-#define BLOCK_NUMBER_MIN 5
-#define BLOCK_NUMBER_MAX 10
-#define BLOCK_Y_MIN 300
-#define BLOCK_Y_MAX (SCREEN_Y_BOUND)
-#define BLOCK_X_MIN (-SCREEN_X_BOUND)
-#define BLOCK_X_MAX (SCREEN_X_BOUND)
-
-// #define GOLD_SMALL_SIZE 30.0f
-// #define GOLD_MIDDLE_SIZE 50.0f
-// #define GOLD_LARGE_SIZE 150.0f
-// #define GOLD_SMALL_VALUE 50
-// #define GOLD_MIDDLE_VALUE 100
-// #define GOLD_LARGE_VALUE 500
-
-// #define STONE_SMALL_SIZE 50.0f
-// #define STONE_MIDDLE_SIZE 100.0f
-// #define STONE_LARGE_SIZE 160.0f
-// #define STONE_SMALL_VALUE 33
-// #define STONE_MIDDLE_VALUE 60
-// #define STONE_LARGE_VALUE 90
-
-const int g_goldValue[3] = { 50, 100, 500 };
-const double g_goldSize[3] = { 30.0f, 50.0f, 150.0f};
-const int g_stoneValue[3] = { 33, 60, 90 };
-const double g_stoneSize[3] = { 50.0f, 100.0f, 160.0f };
-
 
 struct Position // 金块或者石块的位置
 {
