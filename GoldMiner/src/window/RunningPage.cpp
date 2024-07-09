@@ -95,15 +95,15 @@ void RunningPage::refreshPage()
             switch (int(block.getSize()))
             {
             //case BlockSize::Small:
-            case 30:
+            case int(SMALL_GOLD):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sgold_block.gif";
                 break;
             //case BlockSize::Middle:
-            case 50:
+            case int(MIDDLE_GOLD):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
                 break;
             //case BlockSize::Large:
-            case 150:
+            case int(BIG_GOLD):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bgold_block.gif";
                 break;
             default:
@@ -115,15 +115,15 @@ void RunningPage::refreshPage()
             switch (int(block.getSize()))
             {
             //case BlockSize::Small:
-            case 50:
+            case int(SMALL_STONE):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sstone.png";
                 break;
             //case BlockSize::Middle:
-            case 100:
+            case int(MIDDLE_STONE):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
                 break;
             //case BlockSize::Large:
-            case 160:
+            case int(BIG_STONE):
                 blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bstone.png";
                 break;
             default:
