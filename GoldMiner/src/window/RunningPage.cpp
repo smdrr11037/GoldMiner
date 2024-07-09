@@ -75,7 +75,7 @@ void RunningPage::clearBlocks() {
     displayedBlocks.clear();  // 清空存储的 QLabel  
 }
 
-//TODO : 线的实现（Hook的getIsExtending()方法）
+
 void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook, const Player& player)
 {
     //先擦除上次显示的金块
@@ -88,14 +88,14 @@ void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook
             QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
             QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
             blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x, OY +block.getPosition().y, blockImage.width(), blockImage.height());
+            blockLabel->setGeometry(OX +block.getPosition().x - blockImage.width()/2, OY +block.getPosition().y - blockImage.height()/2, blockImage.width(), blockImage.height());
             blockLabel->show();
         }
         else {
             QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
             QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
             blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x, OY +block.getPosition().y, blockImage.width(), blockImage.height());
+            blockLabel->setGeometry(OX +block.getPosition().x - blockImage.width()/2, OY +block.getPosition().y - blockImage.height()/2, blockImage.width(), blockImage.height());
             blockLabel->show();
         }
         displayedBlocks.push_back(blockLabel);  // 存储这些 QLabel，以便稍后清除
