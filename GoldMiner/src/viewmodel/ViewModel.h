@@ -15,13 +15,14 @@ class ViewModel : public QObject
     Q_OBJECT
 public:
     explicit ViewModel(QObject *parent = nullptr);
-    virtual ~ViewModel(){};
+    ~ViewModel();
+    std::shared_ptr<GameData> getGameData();
 
 signals:
 // To View
     void winGame();
     void loseGame();
-    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
+    void stateChanged();
 
 public slots:
     void handleTimeOut();
@@ -33,7 +34,7 @@ public slots:
     void handlePressKey();
 
     // from Model
-    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player);
+    void updateState();
 private:
     Model *m_model;
 };

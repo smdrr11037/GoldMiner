@@ -76,9 +76,13 @@ void RunningPage::clearBlocks() {
 }
 
 //TODO : 线的实现（Hook的getIsExtending()方法）
-void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook, const Player& player)
+void RunningPage::refreshPage()
 {
+    // const std::vector<Block>& blocks, const Hook& hook, const Player& player
     //先擦除上次显示的金块
+    const std::vector<Block>& blocks = *m_gameData->blockVector;
+    const Hook& hook = *m_gameData->hook;
+    const Player& player = *m_gameData->player;
     this->clearBlocks();
     // BLOCK
     for (const auto& block : blocks) {
@@ -210,4 +214,9 @@ void RunningPage::paintEvent(QPaintEvent* event)
     painter.setPen(QPen(Qt::black, 8, Qt::SolidLine, Qt::RoundCap));
     // 画线  
     painter.drawLine(startPoint, endPoint);
+}
+    
+void RunningPage::setGameData(std::shared_ptr<GameData> gameData) {
+    // 绑定游戏数据到本页面
+    m_gameData = gameData;
 }

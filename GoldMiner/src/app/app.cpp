@@ -6,7 +6,7 @@ GameAPP::GameAPP(){
     // 用 QObject::connect 实现 view 和 view model 层的数据绑定
 
     //:m_model(),m_viewModel())
-
+    m_window->setGameData(m_viewModel->getGameData());
     // 游戏胜负
     QObject::connect(m_viewModel, &ViewModel::winGame, m_window, &MainWindow::handleWinGame);
     QObject::connect(m_viewModel, &ViewModel::loseGame, m_window, &MainWindow::handleLoseGame);

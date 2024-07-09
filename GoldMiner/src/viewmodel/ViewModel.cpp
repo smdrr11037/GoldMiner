@@ -8,7 +8,9 @@ ViewModel::ViewModel(QObject *parent)
     connect(m_model, &Model::stateChanged, this, &ViewModel::updateState);
 }
 // slot function
-
+ViewModel::~ViewModel(){
+    delete m_model;
+}
 // from view
 void ViewModel::handleTimeOut()
 {
@@ -36,7 +38,11 @@ void ViewModel::handlePressKey()
 }
 
 // from model
-void ViewModel::updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player)
+void ViewModel::updateState()
 {
-    emit stateChanged(blocks, hook, player);
+    emit stateChanged();
+}
+std::shared_ptr<GameData> ViewModel::getGameData()
+{
+    return m_model->getGameData();
 }

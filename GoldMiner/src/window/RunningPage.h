@@ -32,7 +32,8 @@ class RunningPage : public QWidget
 public:
     explicit RunningPage(QWidget* parent = nullptr);
     void keyPressEvent(QKeyEvent* event);
-    void refreshPage(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
+    void refreshPage();
+    void setGameData(std::shared_ptr<GameData> gameData);
 signals:
     void exitGame(); // 退出游戏的信号  
     void hookKeyDown();                 //下爪信号，emit给app层
@@ -58,6 +59,7 @@ private:
     void clearBlocks();
     std::vector<QLabel*> displayedBlocks;  // 存储显示的 QLabel
     double rotationAngle = 45;
+    std::shared_ptr<GameData> m_gameData;
 };
 
 #endif
