@@ -25,6 +25,10 @@ void ViewModel::handlePlayAgain()
 {
     m_model->playAgain();
 }
+void ViewModel::handleNextLevel()
+{
+    m_model->nextLevel();
+}
 void ViewModel::handlePressKey()
 {
     m_model->extendHook();
