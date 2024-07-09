@@ -24,7 +24,7 @@ public:
     }*/
 
 signals:
-    void startGame(GameState gameState);
+    void startGame();
 
 private slots:
     void startButtonClicked();

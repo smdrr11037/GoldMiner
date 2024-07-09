@@ -64,7 +64,7 @@ RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 void RunningPage::exitButtonClicked()
 {
     // 发射信号，通知游戏退出  
-    emit exitGame(GameState::Start);
+    emit exitGame();
 }
 
 void RunningPage::clearBlocks() {

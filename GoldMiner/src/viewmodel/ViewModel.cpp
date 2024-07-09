@@ -5,11 +5,12 @@ ViewModel::ViewModel(QObject *parent)
     m_model = new Model(nullptr);
     connect(m_model, &Model::winGame, this, &ViewModel::winGame);
     connect(m_model, &Model::loseGame, this, &ViewModel::loseGame);
+    connect(m_model, &Model::stateChanged, this, &ViewModel::updateState);
 }
 // slot function
 
 // from view
-void ViewModel::frameElapsedEmit()
+void ViewModel::handleTimeOut()
 {
     m_model->checkHookState();
 }

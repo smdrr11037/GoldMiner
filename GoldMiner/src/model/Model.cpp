@@ -3,7 +3,6 @@
 
 Model::Model(QObject *parent)
 {
-    m_gameState = GameState::Start;
     m_level = 1;
 }
 

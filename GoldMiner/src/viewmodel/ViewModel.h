@@ -24,7 +24,7 @@ signals:
     void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
 
 public slots:
-    void frameElapsedEmit();
+    void handleTimeOut();
     // from View
     void handleStartGame();
     void handleExitGame();

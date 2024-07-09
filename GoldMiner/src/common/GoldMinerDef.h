@@ -221,12 +221,15 @@ class Player // 玩家类
 };
 
 struct GameData {
-    std::vector<Block> m_block;
-    Hook m_hook;
-    Player m_player;
-
-    // 构造函数
-    GameData(){}
+    std::vector<Block> blockVector;
+    std::shared_ptr<Hook> hook;
+    std::shared_ptr<Player> player;
 };
+
+// 用法（没写构造函数时
+// std::shared_ptr<Hook> hook = std::make_shared<Hook>(Position{0, 0}, 45.0);
+// 初始化其他对象 ...
+// std::shared_ptr<GameData> gameData = std::make_shared<GameData>(GameData{blocks, hook, player});
+// 只需要把 gameData 暴露和获取即可
 
 #endif // GOLD_MINER_DEF_H

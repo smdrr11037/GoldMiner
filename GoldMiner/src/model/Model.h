@@ -74,7 +74,6 @@ private:
     int m_level;
     Hook *m_hook;                // 钩子
     std::vector<Block> m_blocks; // 存储所有块的集合
-    GameState m_gameState;       // 游戏状态
     Player *m_player;
     Block *m_collidedBlock;      // 捕获的物块  
 };
