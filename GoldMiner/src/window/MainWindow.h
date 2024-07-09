@@ -16,6 +16,8 @@
 #include "GameOver.h"
 #include "../common/GoldMinerDef.h"
 
+const int WindowWidth = 2560;
+const int WindowHeight = 1440;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

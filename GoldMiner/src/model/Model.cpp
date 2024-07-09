@@ -216,9 +216,6 @@ void Model::updatePlayerTime()
         m_player->setTime(m_player->getTime()-1);
         showInfo();
     }
-    // if(m_frameNumber % 45 == 0){
-    //         extendHook();
-    // } // test
     if(m_player->getTime() == 0){
         exitGame();
         return;
