@@ -23,6 +23,8 @@
 
 const int OX = 1250;
 const int OY = 300;
+const double HOOK_OX = OX-77;
+const int HOOK_OY = OY-56;
 class RunningPage : public QWidget
 {
     Q_OBJECT
@@ -47,12 +49,15 @@ private:
     QLabel* targetLabel;      // 过关目标显示的标签  
     QLabel* timeLabel;        // 过关目标显示的标签  
     QPushButton* exitButton;  // 退出按钮  
-    QLabel* backgroundLabel;  // 背景显示的标签  
-    QLabel* blocksLabel;      // 金块和石块显示的标签  
+    //QLabel* backgroundLabel;  // 背景显示的标签  
+    //QLabel* blocksLabel;      // 金块和石块显示的标签  
     QLabel* hookLabel;        // 钩子显示的标签  
     QVBoxLayout* layout;      // 用于管理视图的布局  
     QPoint startPoint;
     QPoint endPoint;
+    void clearBlocks();
+    std::vector<QLabel*> displayedBlocks;  // 存储显示的 QLabel
+    double rotationAngle = 45;
 };
 
 #endif
