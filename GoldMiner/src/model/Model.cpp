@@ -192,9 +192,6 @@ void Model::updatePlayerTime()
         m_player->setTime(m_player->getTime()-1);
         showInfo();
     }
-    if(m_hook->getAngle() < 90 && m_hook->getAngle() > 85 && !m_hook->getIsExtending() && !m_hook->getIsRetracting()){
-            extendHook();
-    } // test
     if(m_player->getTime() == 0){
         exitGame();
         return;
