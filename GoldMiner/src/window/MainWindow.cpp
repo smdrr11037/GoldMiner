@@ -130,9 +130,9 @@ void MainWindow::handlePressKey()
 }
 
 //切帧
-void MainWindow::updateState(const std::vector<Block>& blocks, const Hook& hook, const Player& player)
+void MainWindow::updateState()
 {
-    runningPage->refreshPage(blocks, hook, player);
+    runningPage->refreshPage();
 }
 /*
 //需要切换页面的信号
@@ -189,4 +189,8 @@ void MainWindow::handleLoseGame()
 
     QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/gameover.jpg";
     setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
+}
+void MainWindow::setGameData(std::shared_ptr<GameData> gameData)
+{
+    runningPage->setGameData(gameData);
 }

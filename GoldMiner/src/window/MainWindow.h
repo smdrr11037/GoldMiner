@@ -27,6 +27,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+    void setGameData(std::shared_ptr<GameData> gameData);
 
 //在槽函数中需要发射的信号
 signals:
@@ -49,8 +50,7 @@ public slots:
     //void updatePage(const GameState& gameState);
     void handleWinGame();
     void handleLoseGame();
-    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
-    //实际需要更多参数void runningRefreshPage(std::vector<Block> blocks, Hook hook, GameState gameState, Player player);
+    void updateState();
 
 private:
     QStackedWidget* stackedWidget;

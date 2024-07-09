@@ -4,6 +4,7 @@
 Model::Model(QObject *parent)
 {
     m_level = 1;
+    init();
 }
 
 Model::~Model()
@@ -69,28 +70,28 @@ void Model::exitGame()
     }
     m_collidedBlock = nullptr;
     m_blocks.clear();
-    delete m_hook;
-    delete m_player;
-    m_hook = nullptr;
-    m_player = nullptr;
+    // delete m_hook;
+    // delete m_player;
+    // m_hook = nullptr;
+    // m_player = nullptr;
 }
 
 void Model::startGame()
 {
-    init();
+    restart();
     qDebug() << "Model state change to Running";
 }
 
 void Model::playAgain()
 {
-    init();
+    restart();
     qDebug() << "Model state change to Running";
 }
 
 void Model::nextLevel()
 {
     m_level++;
-    init();
+    restart();
     qDebug() << "Model state change to Running";
 }
 
@@ -112,6 +113,30 @@ void Model::init()
     m_player = new Player(0, 45, m_level, 300);
     m_frameNumber = 0;
     m_collidedBlock = nullptr;
+    m_gameData = std::make_shared<GameData>(GameData{&m_blocks, m_hook, m_player});
+}
+
+void Model::restart()
+{
+    m_hook->stopExtending();
+    m_hook->setAngle(HOOK_ANGLE_MIN);
+    m_hook->updatePosition();
+
+    m_player->setScore(0);
+    m_player->setTime(45);
+    m_player->setLevel(m_level);
+    m_player->setTargetScore(300);
+
+    m_blocks.clear();
+    generateBlocks();
+    qDebug() << "Block number:" << m_blocks.size();
+    for(auto block: m_blocks){
+        qDebug() << "----------";
+        qDebug() << "Gold?" << block.isGoldBlock();
+        qDebug() << "Size" << block.getSize();
+        qDebug() << "Value" << block.getValue();
+        qDebug() << "Position (" << block.getPosition().x << ',' << block.getPosition().y << ')'; 
+    }
 }
 
 void Model::updateHookPosition(double dx, double dy)
@@ -198,7 +223,7 @@ void Model::updateHook()
         updateHookPosition(dx, dy);
     }  
 
-    emit stateChanged(m_blocks, *m_hook, *m_player);
+    emit stateChanged();
 }
 
 void Model::updatePlayerTime()
@@ -262,4 +287,9 @@ void Model::generateBlocks()
             m_blocks.push_back(b);
         }
     }
+}
+
+std::shared_ptr<GameData> Model::getGameData()
+{
+    return m_gameData;
 }
