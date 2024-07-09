@@ -12,6 +12,7 @@
 #include <QObject>
 #include <QDebug>
 #include <vector>
+#include <random>
 #include "../common/GoldMinerDef.h"
 
 #define EXTENDING_PER_SECOND 250.0f
