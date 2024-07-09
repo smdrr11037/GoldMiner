@@ -32,7 +32,7 @@ RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 
     //GOAL  实际需要传入当前level的难度对应目标分数
     targetLabel = new QLabel("Target Points: 100", this);
-    targetLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: black;");
+    targetLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: red;");
 
     timeLabel = new QLabel("Time: 60 s", this);
     timeLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: black;");
@@ -84,20 +84,53 @@ void RunningPage::refreshPage(const std::vector<Block>& blocks, const Hook& hook
     for (const auto& block : blocks) {
         // 根据 block 的信息，创建相应的 QLabel 并设置位置、大小和图片  
         QLabel* blockLabel = new QLabel(this);
+        QString blockImagePath;
+        /*const double g_goldSize[3] = { 30.0f, 50.0f, 150.0f};
+        const double g_stoneSize[3] = { 50.0f, 100.0f, 160.0f };*/
         if (block.isGoldBlock()) {
-            QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
-            QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
-            blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x - blockImage.width()/2, OY +block.getPosition().y - blockImage.height()/2, blockImage.width(), blockImage.height());
-            blockLabel->show();
+            switch (int(block.getSize()))
+            {
+            //case BlockSize::Small:
+            case 30:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sgold_block.gif";
+                break;
+            //case BlockSize::Middle:
+            case 50:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
+                break;
+            //case BlockSize::Large:
+            case 150:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bgold_block.gif";
+                break;
+            default:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
+                break;
+            }
         }
         else {
-            QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
-            QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
-            blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x - blockImage.width()/2, OY +block.getPosition().y - blockImage.height()/2, blockImage.width(), blockImage.height());
-            blockLabel->show();
+            switch (int(block.getSize()))
+            {
+            //case BlockSize::Small:
+            case 50:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sstone.png";
+                break;
+            //case BlockSize::Middle:
+            case 100:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
+                break;
+            //case BlockSize::Large:
+            case 160:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bstone.png";
+                break;
+            default:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
+                break;
+            }
         }
+        QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
+        blockLabel->setPixmap(blockImage);
+        blockLabel->setGeometry(OX + block.getPosition().x - blockImage.width() / 2, OY + block.getPosition().y - blockImage.height() / 2, blockImage.width(), blockImage.height());
+        blockLabel->show();
         displayedBlocks.push_back(blockLabel);  // 存储这些 QLabel，以便稍后清除
     }
 
