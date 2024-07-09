@@ -23,6 +23,19 @@
 #define SECONDS_PER_SWING 2.1f
 #define DEGREE_CHANGE_PER_FRAME (HOOK_ANGLE_RANGE/(SECONDS_PER_SWING*FRAME_NUMBER)) 
 
+#define BLOCK_NUMBER_MIN 5
+#define BLOCK_NUMBER_MAX 10
+#define BLOCK_Y_MIN 300
+#define BLOCK_Y_MAX (SCREEN_Y_BOUND)
+#define BLOCK_X_MIN (-SCREEN_X_BOUND)
+#define BLOCK_X_MAX (SCREEN_X_BOUND)
+
+const int g_goldValue[3] = { 50, 100, 500 };
+const double g_goldSize[3] = { 30.0f, 50.0f, 150.0f};
+const int g_stoneValue[3] = { 33, 60, 90 };
+const double g_stoneSize[3] = { 50.0f, 100.0f, 160.0f };
+
+
 class Model : public QObject
 {
     Q_OBJECT
@@ -43,18 +56,18 @@ public:
     void updateHook();                          // 每帧更新钩子位置(旋转或伸长或收回)
     void showInfo();
 
-signals:
-    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
-    void pageChanged(const GameState &gameState);
-
-public slots:
-
     void checkHookState();      // 检查钩子状态
     void startExtending();      // 开始伸长钩子
     void startGame();           // 开始游戏
     void exitGame();            // 退出游戏
     void playAgain();           // 重试
     void nextLevel();
+
+signals:
+
+    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
+    void winGame();
+    void loseGame();
 
 private:
     int m_frameNumber;
