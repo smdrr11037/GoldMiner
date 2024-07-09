@@ -10,7 +10,6 @@
 #include "../common/GoldMinerDef.h"
 #include "../common/timer.h"
 
-#define FrameNumber 30
 
 class ViewModel : public QObject
 {
@@ -19,31 +18,30 @@ public:
     explicit ViewModel(QObject *parent = nullptr);
     virtual ~ViewModel(){};
 
-    // void startGame();
-    // void pauseGame();
-    // void resumeGame();
-    // void stopGame();
-    // void updateHookPosition(int x, int y);
-    // void updateHookRotation(int angle);
-    // void updateHookState(HookState state);
-    // void updateBlocks(std::vector<Block> blocks);
-    // void updateGameState(GameState state);
-    // void updateScore(int score);
-    // void updateLevel(int level);
-    // void updateTargetScore(int targetScore);
 signals:
+// To Model
     void frameElapsed();
     void startGame();
     void exitGame();
+    void playAgain();
+    void nextLevel();
+    void pressKey();
+// To View
     void pageChanged(const GameState &GameState);
     void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
 
 public slots:
     void frameElapsedEmit();
+    // from View
     void handleStartGame();
     void handleExitGame();
-    void updatePage(GameState &GameState);
-    void updateState(std::vector<Block>& blocks, Hook& hook, Player &player);
+    void handlePlayAgain();
+    void handleNextLevel();
+    void handlePressKey();
+    // from Model
+    void updatePage(const GameState &GameState);
+    void updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player);
+    
 
 private:
     QTimer *m_pTimer;

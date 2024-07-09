@@ -14,9 +14,13 @@
 #include <vector>
 #include "../common/GoldMinerDef.h"
 
-#define MOVEMENT_PER_FRAME 150.0f
-#define PI 3.1415926f
-#define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
+#define EXTENDING_PER_SECOND 250.0f
+#define EXTENDING_PER_FRAME (EXTENDING_PER_SECOND/FRAME_NUMBER)
+#define RETRACTING_PER_SECOND 425.0f
+#define RETRACTING_PER_FRAME (RETRACTING_PER_SECOND/FRAME_NUMBER)
+
+#define SECONDS_PER_SWING 2.1f
+#define DEGREE_CHANGE_PER_FRAME (HOOK_ANGLE_RANGE/(SECONDS_PER_SWING*FRAME_NUMBER)) 
 
 class Model : public QObject
 {
@@ -24,34 +28,41 @@ class Model : public QObject
 public:
     explicit Model(QObject *parent = nullptr);
     virtual ~Model();
-    void init();                 // 每关初始化钩子、物块、游戏状态
-    void generateBlocks();       // 生成物块
-    void updateHookPosition(int x, int y); // 更新钩子位置
-    void updateHookAngle(double angle);    // 更新钩子角度
-    void extendHook();           // 固定钩子角度并伸长
-    void retractHook();          // 收回钩子
-    bool checkCollision();       // 检查碰撞
-    bool checkOutOfBound();      // 检查出界
-
+    void init();                                // 每关初始化钩子、物块、游戏状态
+    void generateBlocks();                      // 生成物块
+    void updateHookPosition(double dx, double dy);      // 更新钩子位置
+    void updateBlockPosition(double dx, double dy);     // 每帧更新物块位置
+    void updateHookAngle(double angle);         // 更新钩子角度
+    void extendHook();                          // 固定钩子角度并伸长
+    void retractHook();                         // 收回钩子
+    Block* checkCollision();                    // 检查碰撞
+    bool checkOutOfBound();                     // 检查出界
+    void updatePlayerScore();                   // 收回物块时更新分数
+    void updatePlayerTime();                    // 每帧更新玩家游戏倒计时
+    void updateHook();                          // 每帧更新钩子位置(旋转或伸长或收回)
+    void showInfo();
 
 signals:
     void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
     void pageChanged(const GameState &gameState);
 
 public slots:
-    void updateHook();          // 每帧更新钩子位置(旋转或伸长或收回)
+
+    void checkHookState();      // 检查钩子状态
     void startExtending();      // 开始伸长钩子
     void startGame();           // 开始游戏
-    void exitGame();           // 退出游戏
+    void exitGame();            // 退出游戏
+    void playAgain();           // 重试
+    void nextLevel();
 
 private:
-    int m_score;
-    int targetScore;
-    Hook *m_hook;                 // 钩子
+    int m_frameNumber;
+    int m_level;
+    Hook *m_hook;                // 钩子
     std::vector<Block> m_blocks; // 存储所有块的集合
     GameState m_gameState;       // 游戏状态
-    int m_level;                 // 等级
     Player *m_player;
+    Block *m_collidedBlock;      // 捕获的物块  
 };
 
 #endif // COUNTERMODEL_H
