@@ -31,7 +31,6 @@ public:
 
 //在槽函数中需要发射的信号
 signals:
-    void refreshPageSignal(const std::vector<Block>& blocks, const Hook& hook, const Player& player);
     void startGame();
     void exitGame();
     void nextLevel();
@@ -48,7 +47,6 @@ private slots:
     void handlePressKey();          //RunningPage信号
     
 public slots:
-    //void updatePage(const GameState& gameState);
     void handleWinGame();
     void handleLoseGame();
     void updateState();

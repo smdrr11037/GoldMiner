@@ -16,15 +16,15 @@ public:
     explicit GameOver(QWidget* parent = nullptr);
 
 signals:
-    void replay(); // 进入下一关的信号  
+    void replay();
 
 private slots:
-    void replayButtonClicked(); // 下一关按钮点击时的槽函数  
+    void replayButtonClicked();
 
 private:
-    QLabel* overImageLabel;    // 显示游戏胜利画面的标签  
-    QPushButton* replayLevelButton; // 进入下一关按钮  
-    QVBoxLayout* layout;           // 用于管理视图的布局  
+    QLabel* overImageLabel;
+    QPushButton* replayLevelButton;
+    QVBoxLayout* layout;
 };
 
 #endif

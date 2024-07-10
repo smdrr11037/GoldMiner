@@ -19,6 +19,13 @@
 #define SCREEN_Y_BOUND 865
 #define DEGREES_TO_RADIANS(angle) (angle*PI/180.0f)
 
+#define SMALL_GOLD 75.0f
+#define MIDDLE_GOLD 100.0f
+#define BIG_GOLD 130.0f
+#define SMALL_STONE 50.0f
+#define MIDDLE_STONE 90.0f
+#define BIG_STONE 130.0f
+
 struct Position // 金块或者石块的位置
 {
     Position(){ x=0, y=0; }

@@ -3,8 +3,6 @@
 
 StartPage::StartPage(QWidget* parent) : QWidget(parent)
 {
-    // 设置背景图片  可否在此处实现
- 
     // 创建一个圆形按钮  
     //RoundButton* roundButton = new RoundButton("Start Game", this);
     //roundButton->setGeometry(200, 200, 100, 100);  // 设置按钮的位置和大小  
