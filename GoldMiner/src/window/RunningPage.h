@@ -36,8 +36,6 @@ public:
     void setGameData(std::shared_ptr<GameData> gameData);
 signals:
     void exitGame(); // 退出游戏的信号  
-    void hookKeyDown();                 //下爪信号，emit给app层
-    //void testSignal(const std::vector<Block>& blocks, const Hook& hook, const GameState& gameState);
     void runningPressKey();
 private slots:
     void exitButtonClicked(); // 退出按钮点击时的槽函数  
@@ -50,8 +48,6 @@ private:
     QLabel* targetLabel;      // 过关目标显示的标签  
     QLabel* timeLabel;        // 过关目标显示的标签  
     QPushButton* exitButton;  // 退出按钮  
-    //QLabel* backgroundLabel;  // 背景显示的标签  
-    //QLabel* blocksLabel;      // 金块和石块显示的标签  
     QLabel* hookLabel;        // 钩子显示的标签  
     QVBoxLayout* layout;      // 用于管理视图的布局  
     QPoint startPoint;

@@ -18,10 +18,6 @@ class StartPage : public QWidget
 
 public:
     explicit StartPage(QWidget *parent = nullptr);
-    /*~StartPage() {
-        delete startButton;
-        delete layout;
-    }*/
 
 signals:
     void startGame();
@@ -30,8 +26,8 @@ private slots:
     void startButtonClicked();
 
 private:
-    QPushButton *startButton; // 指向 QPushButton 对象的指针，用于游戏开始的按钮
-    QVBoxLayout *layout;      // 指向 QVBoxLayout 对象的指针，用于管理视图的布局
+    QPushButton *startButton; // 游戏开始的按钮
+    QVBoxLayout *layout;      // 管理视图的布局
 };
 
 //class RoundButton : public QPushButton

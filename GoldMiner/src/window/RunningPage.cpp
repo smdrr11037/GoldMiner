@@ -4,8 +4,6 @@
 
 RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 {
-    // 设置背景图片  可否在此处实现
-    
     // HOOK
     QString hookImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/hook.png";
     QPixmap hookImage(hookImagePath);
@@ -17,15 +15,6 @@ RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
     transform.rotate(0); // 设置旋转角度  
     hookLabel->setPixmap(hookImage.transformed(transform));
     
-    /*
-    // 创建金块显示标签
-    QString imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
-    QPixmap goldImage(imagePath);
-    blocksLabel = new QLabel(this);
-    blocksLabel->setPixmap(goldImage);
-    int x_position = 1200, y_position = 1000;
-    blocksLabel->setGeometry(x_position, y_position, goldImage.width(), goldImage.height());  // 设置金块标签的位置和大小
-    */
     //SCORE
     scoreLabel = new QLabel("Score: 0", this);
     scoreLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: black;");
@@ -75,10 +64,8 @@ void RunningPage::clearBlocks() {
     displayedBlocks.clear();  // 清空存储的 QLabel  
 }
 
-//TODO : 线的实现（Hook的getIsExtending()方法）
 void RunningPage::refreshPage()
 {
-    // const std::vector<Block>& blocks, const Hook& hook, const Player& player
     //先擦除上次显示的金块
     const std::vector<Block>& blocks = *m_gameData->blockVector;
     const Hook& hook = *m_gameData->hook;
@@ -88,20 +75,45 @@ void RunningPage::refreshPage()
     for (const auto& block : blocks) {
         // 根据 block 的信息，创建相应的 QLabel 并设置位置、大小和图片  
         QLabel* blockLabel = new QLabel(this);
+        QString blockImagePath;
         if (block.isGoldBlock()) {
-            QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
-            QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
-            blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x, OY +block.getPosition().y, blockImage.width(), blockImage.height());
-            blockLabel->show();
+            switch (int(block.getSize()))
+            {
+            case int(SMALL_GOLD):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sgold_block.gif";
+                break;
+            case int(MIDDLE_GOLD):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
+                break;
+            case int(BIG_GOLD):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bgold_block.gif";
+                break;
+            default:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newgold.png";
+                break;
+            }
         }
         else {
-            QString blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
-            QPixmap blockImage(blockImagePath); // 假设 Block 类有一个 getImagePath 函数来获取图片路径  
-            blockLabel->setPixmap(blockImage);
-            blockLabel->setGeometry(OX +block.getPosition().x, OY +block.getPosition().y, blockImage.width(), blockImage.height());
-            blockLabel->show();
+            switch (int(block.getSize()))
+            {
+            case int(SMALL_STONE):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Sstone.png";
+                break;
+            case int(MIDDLE_STONE):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
+                break;
+            case int(BIG_STONE):
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/Bstone.png";
+                break;
+            default:
+                blockImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/newstone.png";
+                break;
+            }
         }
+        QPixmap blockImage(blockImagePath); 
+        blockLabel->setPixmap(blockImage);
+        blockLabel->setGeometry(OX + block.getPosition().x - blockImage.width() / 2, OY + block.getPosition().y - blockImage.height() / 2, blockImage.width(), blockImage.height());
+        blockLabel->show();
         displayedBlocks.push_back(blockLabel);  // 存储这些 QLabel，以便稍后清除
     }
 
@@ -116,7 +128,7 @@ void RunningPage::refreshPage()
     rotatedPixmap.fill(Qt::transparent);
     QPainter painter(&rotatedPixmap);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    // 将绘图原点平移到旋转中心  
+    // 将绘图原点平移到钩子末端  
     painter.translate(w/2, h / 4);
     // 进行旋转  
     painter.rotate(rotationAngle);
@@ -134,8 +146,8 @@ void RunningPage::refreshPage()
     update();
 
     // PLAYER
-    scoreLabel->setText("Score: " + QString::number(player.getScore())); // 假设 GameState 类有一个 getScore 函数来获取分数  
-    targetLabel->setText("Target Points: " + QString::number(player.getTargetScore())); // 假设 GameState 类有一个 getTargetScore 函数来获取目标分数
+    scoreLabel->setText("Score: " + QString::number(player.getScore())); 
+    targetLabel->setText("Target Points: " + QString::number(player.getTargetScore()));
     timeLabel->setText("Time: " + QString::number(player.getTime())+" s");
 }
 

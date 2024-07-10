@@ -30,11 +30,10 @@
 #define BLOCK_X_MIN (-SCREEN_X_BOUND)
 #define BLOCK_X_MAX (SCREEN_X_BOUND)
 
-const int g_goldValue[3] = { 50, 100, 500 };
-const double g_goldSize[3] = { 30.0f, 50.0f, 150.0f};
-const int g_stoneValue[3] = { 33, 60, 90 };
-const double g_stoneSize[3] = { 50.0f, 100.0f, 160.0f };
-
+const int g_goldValue[3] = {50, 100, 500};
+const int g_stoneValue[3] = {33, 60, 90};
+const double g_goldSize[3] = { SMALL_GOLD, MIDDLE_GOLD, BIG_GOLD };
+const double g_stoneSize[3] = { SMALL_STONE, MIDDLE_STONE, BIG_STONE };
 
 class Model : public QObject
 {
