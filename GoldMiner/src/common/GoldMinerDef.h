@@ -131,6 +131,7 @@ public:
         position.y = HOOK_INIT_LENGTH * sin(DEGREES_TO_RADIANS(startAngle));
         isExtending = false;
     }
+    void setAngle(double startAngle){angle=startAngle; }
     double getAngle() const {return angle; }
     Position getPosition() const { return position; }
     bool getIsExtending() const { return isExtending; }
@@ -212,9 +213,9 @@ class Player // 玩家类
 };
 
 struct GameData {
-    std::vector<Block> blockVector;
-    std::shared_ptr<Hook> hook;
-    std::shared_ptr<Player> player;
+    std::vector<Block>* blockVector;
+    Hook* hook;
+    Player* player;
 };
 
 // 用法（没写构造函数时

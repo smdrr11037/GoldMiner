@@ -62,20 +62,23 @@ public:
     void exitGame();            // 退出游戏
     void playAgain();           // 重试
     void nextLevel();
+    std::shared_ptr<GameData> getGameData();
 
 signals:
 
-    void stateChanged(const std::vector<Block> &blocks, const Hook &hook, const Player &player);
+    void stateChanged();
     void winGame();
     void loseGame();
 
 private:
+    void restart();
     int m_frameNumber;
     int m_level;
     Hook *m_hook;                // 钩子
     std::vector<Block> m_blocks; // 存储所有块的集合
     Player *m_player;
     Block *m_collidedBlock;      // 捕获的物块  
+    std::shared_ptr<GameData> m_gameData;
 };
 
 #endif // COUNTERMODEL_H

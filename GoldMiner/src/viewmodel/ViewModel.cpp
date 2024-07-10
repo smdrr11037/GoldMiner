@@ -2,13 +2,26 @@
 #include <QDebug>
 ViewModel::ViewModel(QObject *parent)
 {
-    m_model = new Model(nullptr);
-    connect(m_model, &Model::winGame, this, &ViewModel::winGame);
-    connect(m_model, &Model::loseGame, this, &ViewModel::loseGame);
-    connect(m_model, &Model::stateChanged, this, &ViewModel::updateState);
 }
-// slot function
 
+ViewModel::~ViewModel()
+{
+}
+
+//member function
+std::shared_ptr<GameData> ViewModel::getGameData()
+{
+    return m_model->getGameData();
+}
+void ViewModel::setModel(std::shared_ptr<Model> model)
+{
+    m_model = model;
+    connect(m_model.get(), &Model::winGame, this, &ViewModel::winGame);
+    connect(m_model.get(), &Model::loseGame, this, &ViewModel::loseGame);
+    connect(m_model.get(), &Model::stateChanged, this, &ViewModel::updateState);
+}
+
+// slot function
 // from view
 void ViewModel::handleTimeOut()
 {
@@ -37,8 +50,7 @@ void ViewModel::handlePressKey()
 }
 
 // from model
-void ViewModel::updateState(const std::vector<Block>& blocks, const Hook& hook, const Player &player)
+void ViewModel::updateState()
 {
-    qDebug() << "ViewModel: state Changed";
-    emit stateChanged(blocks, hook, player);
+    emit stateChanged();
 }
