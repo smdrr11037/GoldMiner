@@ -1,7 +1,7 @@
 #include "MainWindow.h"  
 #include <QVBoxLayout>
 #include <QMainWindow>  
-#include <QDebug>    //debug
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
@@ -134,40 +134,6 @@ void MainWindow::updateState()
 {
     runningPage->refreshPage();
 }
-/*
-//需要切换页面的信号
-void MainWindow::updatePage(const GameState& gameState)
-{
-    QString imagePath;
-    switch (gameState)
-    {
-    case(GameState::Start):
-        this->setWindowTitle("Gold Miner Initial Start");
-        stackedWidget->setCurrentIndex(0);
-        imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/start.jpg";
-        setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
-        break;
-    case(GameState::Running):
-        this->setWindowTitle("Running");
-        stackedWidget->setCurrentIndex(1);
-        imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/background.jpg";
-        setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
-        break;
-    case(GameState::GameOver):
-        this->setWindowTitle("Game Over");
-        stackedWidget->setCurrentIndex(3);
-        imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/gameover.jpg";
-        setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
-        break;
-    case(GameState::Win):
-        this->setWindowTitle("This Level Victory");
-        stackedWidget->setCurrentIndex(2);
-        imagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/victory.jpg";
-        setStyleSheet("MainWindow { background-image: url(" + imagePath + "); background-size: cover; }");
-        break;
-    }
-}
-*/
 
 void MainWindow::handleWinGame()
 {

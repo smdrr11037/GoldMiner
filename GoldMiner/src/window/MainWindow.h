@@ -47,7 +47,6 @@ private slots:
     void handlePressKey();          //RunningPage信号
     
 public slots:
-    //void updatePage(const GameState& gameState);
     void handleWinGame();
     void handleLoseGame();
     void updateState();
