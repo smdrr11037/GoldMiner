@@ -132,7 +132,7 @@ void Model::restart()
     }
     m_player->setLevel(m_level);
     //m_player->setTargetScore(300);
-    m_player->setTargetScore(300*m_level*0.5);
+    m_player->setTargetScore(300+100*m_level);
 
     m_blocks.clear();
     generateBlocks();
@@ -208,7 +208,7 @@ void Model::updateHook()
     assert(!(m_hook->getIsRetracting()&&m_hook->getIsExtending()));
     if(!m_hook->getIsRetracting() && !m_hook->getIsExtending()){
         //updateHookAngle(DEGREE_CHANGE_PER_FRAME);
-        double ratateSpeed = DEGREE_CHANGE_PER_FRAME + (double)m_level;
+        double ratateSpeed = DEGREE_CHANGE_PER_FRAME + (double)m_level*0.5;
         updateHookAngle(ratateSpeed);
         m_hook->updatePosition();
     }
