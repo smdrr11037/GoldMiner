@@ -4,8 +4,6 @@
 #define GMVIEWMODEL_H
 
 #include <QObject>
-#include <QTimer>
-#include <chrono>
 
 #include "../common/GoldMinerDef.h"
 #include "../model/Model.h"
