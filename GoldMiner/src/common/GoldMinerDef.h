@@ -145,6 +145,9 @@ public:
     void startExtending() { isExtending = true; }
     void stopExtending() { isExtending = false; }
     bool getIsRetracting() const { return isRetracting; }
+    bool getIsCatch()const { return isCatch; }
+    void startCatch() { isCatch = true; }
+    void stopCatch() { isCatch = false; }
     void startRetracting() { isRetracting = true; }
     void stopRetracting() { isRetracting = false; }
     void updatePosition(double dx, double dy)
@@ -194,6 +197,7 @@ private:
     bool isExtending;
     bool isRetracting;
     bool isSwingForwarding;
+    bool isCatch;
     Position position;
 };
 
