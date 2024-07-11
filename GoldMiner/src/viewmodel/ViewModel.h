@@ -15,6 +15,7 @@ public:
     explicit ViewModel(QObject *parent = nullptr);
     ~ViewModel();
     std::shared_ptr<GameData> getGameData();
+    void setModel(std::shared_ptr<Model> model);
 
 signals:
 // To View
@@ -34,7 +35,7 @@ public slots:
     // from Model
     void updateState();
 private:
-    Model *m_model;
+    std::shared_ptr<Model> m_model;
 };
 
 
