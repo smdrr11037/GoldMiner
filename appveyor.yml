@@ -15,7 +15,7 @@ environment:
       configuration: Release
     - platform: x64
       configuration: Debug
-  QT_VERSION: 5.14.2
+  QT_VERSION: 5.15.2
 
 # 构建映像
 image: Visual Studio 2022
@@ -24,8 +24,6 @@ image: Visual Studio 2022
 install:
   # 安装 Qt
   - set PATH=C:\Qt\%QT_VERSION%\msvc2019_64\bin;%PATH%
-  - if not exist C:\Qt\%QT_VERSION%\ call "C:\Qt\Tools\QtInstallerFramework\3.1\bin\qt-unified-windows-x86-online.exe" --platform minimal --script .\qt-installer-noninteractive.qs
-
   # 安装 CMake
   - choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' --version 3.18.4
 
