@@ -33,7 +33,7 @@ void Model::checkHookState()
         m_hook->stopRetracting();
         m_hook->reset();
         if(m_collidedBlock != nullptr){
-            qDebug() << "Block get daze!";
+            qDebug() << "Block get!";
             qDebug() << "Gold?" << m_collidedBlock->isGoldBlock();
             qDebug() << "Size" << m_collidedBlock->getSize();
             qDebug() << "Value" << m_collidedBlock->getValue();
@@ -64,11 +64,11 @@ void Model::exitGame()
 {
     if(m_player->getScore() >= m_player->getTargetScore()) {
         emit winGame();
-        qDebug() << "Model state change to Win";
+        qDebug() << "Win the game";
     }
     else{
         emit loseGame();
-        qDebug() << "Model state change to GameOver";
+        qDebug() << "Game Over";
     }
     m_collidedBlock = nullptr;
     m_blocks.clear();
@@ -81,20 +81,20 @@ void Model::exitGame()
 void Model::startGame()
 {
     restart();
-    qDebug() << "Model state change to Running";
+    qDebug() << "Game Running";
 }
 
 void Model::playAgain()
 {
     restart();
-    qDebug() << "Model state change to Running";
+    qDebug() << "Game Running";
 }
 
 void Model::nextLevel()
 {
     m_level++;
     restart();
-    qDebug() << "Model state change to Running";
+    qDebug() << "Game Running";
 }
 
 //成员函数

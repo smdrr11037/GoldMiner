@@ -4,8 +4,6 @@
 #define GMVIEWMODEL_H
 
 #include <QObject>
-#include <QTimer>
-#include <chrono>
 
 #include "../common/GoldMinerDef.h"
 #include "../model/Model.h"
@@ -17,6 +15,7 @@ public:
     explicit ViewModel(QObject *parent = nullptr);
     ~ViewModel();
     std::shared_ptr<GameData> getGameData();
+    void setModel(std::shared_ptr<Model> model);
 
 signals:
 // To View
@@ -36,7 +35,7 @@ public slots:
     // from Model
     void updateState();
 private:
-    Model *m_model;
+    std::shared_ptr<Model> m_model;
 };
 
 

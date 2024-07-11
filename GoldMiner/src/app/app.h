@@ -3,18 +3,18 @@
 #define APP_H
 #include <QWidget>
 #include <QObject>
-#include "../model/Model.h"
 // #include "../window/CompletePage.h"
 // #include "../window/StartPage.h"
 #include "../window/MainWindow.h"
 #include "../viewmodel/ViewModel.h"
+#include "../model/Model.h"
 
 class GameAPP
 {
 private:
-    MainWindow *m_window;
-    Model *m_model;
-    ViewModel *m_viewModel;
+    std::shared_ptr<MainWindow> m_window;
+    std::shared_ptr<ViewModel>  m_viewModel;
+    std::shared_ptr<Model> m_model;
 public:
     GameAPP();
     ~GameAPP();
