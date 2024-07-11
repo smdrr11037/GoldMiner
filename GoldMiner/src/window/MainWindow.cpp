@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
     std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::seconds(1)) / FRAME_NUMBER;
     m_pTimer = new QTimer();
-    m_pTimer->setInterval(ms.count());
+    m_pTimer->setInterval(ms.count()*1.5);
     connect(m_pTimer, &QTimer::timeout, this, &MainWindow::timeOut);
 }
 

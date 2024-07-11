@@ -207,9 +207,7 @@ void Model::updateHook()
 {
     assert(!(m_hook->getIsRetracting()&&m_hook->getIsExtending()));
     if(!m_hook->getIsRetracting() && !m_hook->getIsExtending()){
-        //updateHookAngle(DEGREE_CHANGE_PER_FRAME);
-        double ratateSpeed = DEGREE_CHANGE_PER_FRAME + (double)m_level*0.5;
-        updateHookAngle(ratateSpeed);
+        updateHookAngle(DEGREE_CHANGE_PER_FRAME);
         m_hook->updatePosition();
     }
     else if(m_hook->getIsExtending()){
@@ -220,7 +218,7 @@ void Model::updateHook()
     else if(m_hook->getIsRetracting()){
         double dx, dy;
         if(m_collidedBlock != nullptr){
-            double rate = m_collidedBlock->getSize() / g_goldSize[0] * 1.5;
+            double rate = m_collidedBlock->getSize() / g_goldSize[0];
             dx = -RETRACTING_PER_FRAME * cos(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             dy = -RETRACTING_PER_FRAME * sin(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             updateBlockPosition(dx, dy);
