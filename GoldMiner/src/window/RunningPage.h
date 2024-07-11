@@ -50,6 +50,7 @@ private:
     QPushButton* exitButton;  // 退出按钮  
     QLabel* hookLabel;        // 钩子显示的标签  
     QVBoxLayout* layout;      // 用于管理视图的布局  
+    QLabel* sweatLabel;
     QPoint startPoint;
     QPoint endPoint;
     void clearBlocks();

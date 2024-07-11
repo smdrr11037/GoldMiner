@@ -4,6 +4,14 @@
 
 RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 {
+    // SWEAT
+    QString sweatImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/sweat.png";;
+    QPixmap sweatImage(sweatImagePath);
+    sweatLabel = new QLabel(this);
+    sweatLabel->setPixmap(sweatImage);
+    sweatLabel->setGeometry(OX + 135, OY - 240, sweatImage.width(), sweatImage.height());
+    sweatLabel->hide();
+
     // HOOK
     QString hookImagePath = QCoreApplication::applicationDirPath() + "/../../../GoldMiner/src/window/image/hook.png";
     QPixmap hookImage(hookImagePath);
@@ -21,7 +29,7 @@ RunningPage::RunningPage(QWidget* parent) : QWidget(parent)
 
     //GOAL  实际需要传入当前level的难度对应目标分数
     targetLabel = new QLabel("Target Points: 100", this);
-    targetLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: black;");
+    targetLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: red;");
 
     timeLabel = new QLabel("Time: 60 s", this);
     timeLabel->setStyleSheet("font-family: Arial; font-size: 50px; font-weight: bold; color: black;");
@@ -146,9 +154,17 @@ void RunningPage::refreshPage()
     update();
 
     // PLAYER
-    scoreLabel->setText("Score: " + QString::number(player.getScore())); 
+    scoreLabel->setText("Level: "+ QString::number(player.getLevel())+"   Score: " + QString::number(player.getScore()));
     targetLabel->setText("Target Points: " + QString::number(player.getTargetScore()));
     timeLabel->setText("Time: " + QString::number(player.getTime())+" s");
+
+    // SWEAT
+    if (hook.getIsCatch()) {
+        sweatLabel->show();
+    }
+    else {
+        sweatLabel->hide();
+    }
 }
 
 void RunningPage::keyPressEvent(QKeyEvent* event) {

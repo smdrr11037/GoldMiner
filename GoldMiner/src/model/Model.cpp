@@ -23,11 +23,13 @@ void Model::checkHookState()
         qDebug() << "Hook out of bound!";
     }
     else if(m_hook->getIsExtending() && b != nullptr){
+        m_hook->startCatch();
         m_collidedBlock = b;
         retractHook();
         qDebug() << "Hook catch a block!";
     }
     else if(m_hook->getIsRetracting() && m_hook->getPosition().getDistance() <= HOOK_INIT_LENGTH){
+        m_hook->stopCatch();
         m_hook->stopRetracting();
         m_hook->reset();
         if(m_collidedBlock != nullptr){
@@ -123,9 +125,14 @@ void Model::restart()
     m_hook->updatePosition();
 
     m_player->setScore(0);
-    m_player->setTime(45);
+    //m_player->setTime(45);
+    m_player->setTime(50 - m_level*5);
+    if (m_player->getTime() < 15) {
+        m_player->setTime(15);
+    }
     m_player->setLevel(m_level);
-    m_player->setTargetScore(300);
+    //m_player->setTargetScore(300);
+    m_player->setTargetScore(300+100*m_level);
 
     m_blocks.clear();
     generateBlocks();
@@ -200,7 +207,9 @@ void Model::updateHook()
 {
     assert(!(m_hook->getIsRetracting()&&m_hook->getIsExtending()));
     if(!m_hook->getIsRetracting() && !m_hook->getIsExtending()){
-        updateHookAngle(DEGREE_CHANGE_PER_FRAME);
+        //updateHookAngle(DEGREE_CHANGE_PER_FRAME);
+        double ratateSpeed = DEGREE_CHANGE_PER_FRAME + (double)m_level*0.5;
+        updateHookAngle(ratateSpeed);
         m_hook->updatePosition();
     }
     else if(m_hook->getIsExtending()){
@@ -211,7 +220,7 @@ void Model::updateHook()
     else if(m_hook->getIsRetracting()){
         double dx, dy;
         if(m_collidedBlock != nullptr){
-            double rate = m_collidedBlock->getSize() / g_goldSize[0];
+            double rate = m_collidedBlock->getSize() / g_goldSize[0] * 1.5;
             dx = -RETRACTING_PER_FRAME * cos(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             dy = -RETRACTING_PER_FRAME * sin(DEGREES_TO_RADIANS(m_hook->getAngle())) / rate;
             updateBlockPosition(dx, dy);
