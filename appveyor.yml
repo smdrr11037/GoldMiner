@@ -1,0 +1,62 @@
+# appveyor.yml
+
+# 项目版本
+version: 1.0.{build}
+
+# 仅在推送到指定分支时构建（可选）
+branches:
+  only:
+    - main
+
+# 环境配置
+environment:
+  matrix:
+    - platform: x64
+      configuration: Release
+    - platform: x64
+      configuration: Debug
+  QT_VERSION: 5.14.2
+
+# 构建映像
+image: Visual Studio 2022
+
+# 安装依赖
+install:
+  # 安装 Qt
+  - set PATH=C:\Qt\%QT_VERSION%\msvc2019_64\bin;%PATH%
+  - if not exist C:\Qt\%QT_VERSION%\ call "C:\Qt\Tools\QtInstallerFramework\3.1\bin\qt-unified-windows-x86-online.exe" --platform minimal --script .\qt-installer-noninteractive.qs
+
+  # 安装 CMake
+  - choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' --version 3.18.4
+
+# 构建脚本
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "Visual Studio 17 2022" -A %platform% -DCMAKE_BUILD_TYPE=%configuration% ..
+  - cmake --build . --config %configuration%
+
+# 测试脚本（现在无）
+# test_script:
+#   - ctest --output-on-failure --config %configuration%
+
+# 部署（到 GitHub Releases）
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: ${GITHUB_TOKEN}
+  release: $(appveyor_repo_tag_name)
+  draft: false
+  prerelease: false
+  artifact: /.*\.zip$/
+  on:
+    branch: main
+    appveyor_repo_tag: true
+
+# 通知设置（可选）
+notifications:
+  - provider: Email
+    to:
+      - 1498646901@qq.com
+    on_build_success: true
+    on_build_failure: true
