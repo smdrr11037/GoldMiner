@@ -40,7 +40,7 @@ after_build:
   - mkdir installation
   - cmake --install . --prefix installation
   - cd %APPVEYOR_BUILD_FOLDER%\build\bin
-  - 7z a GoldMiner.zip installation
+  - 7z a GoldMiner.zip .\installation\
 # 测试脚本（现在无）
 # test_script:
 #   - ctest --output-on-failure --config %configuration%
@@ -50,14 +50,14 @@ artifacts:
   - path: build\bin\GoldMiner.zip
 
 
-deploy:
-  provider: GitHub
-  auth_token:
-    secure: ${GITHUB_TOKEN}
-  artifact: /.*\.zip$/
-  force_update: false
-  on:
-    branch: main
+# deploy:
+#   provider: GitHub
+#   auth_token:
+#     secure: ${GITHUB_TOKEN}
+#   artifact: /.*\.zip$/
+#   force_update: false
+#   on:
+#     branch: main
 
 # 通知设置（可选）
 notifications:
