@@ -1,0 +1,68 @@
+# appveyor.yml
+
+# 项目版本
+version: 1.0.{build}
+
+# 仅在推送到指定分支时构建（可选）
+branches:
+  only:
+    - main
+
+# 环境配置
+environment:
+  matrix:
+    - platform: x64
+      configuration: Release
+    - platform: x64
+      configuration: Debug
+  QT_VERSION: 5.15.2
+
+# 构建映像
+image: Visual Studio 2019
+
+# 安装依赖
+install:
+  # 安装 Qt
+  - set PATH=C:\Qt\%QT_VERSION%\msvc2019_64\bin;%PATH%
+  # 安装 CMake
+  - choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' --version 3.18.4
+
+# 构建脚本
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "Visual Studio 16 2019" -A %platform% -DCMAKE_BUILD_TYPE=%configuration% ..
+  - cmake --build . --config %configuration%
+
+
+# 压缩为 zip
+after_build:
+  - mkdir installation
+  - cmake --install . --prefix installation
+  - cd %APPVEYOR_BUILD_FOLDER%\build\bin
+  - 7z a GoldMiner.zip installation
+# 测试脚本（现在无）
+# test_script:
+#   - ctest --output-on-failure --config %configuration%
+
+# 部署（到 GitHub Releases）
+artifacts:
+  - path: build\bin\GoldMiner.zip
+
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: ${GITHUB_TOKEN}
+  artifact: /.*\.zip$/
+  force_update: false
+  on:
+    branch: main
+
+# 通知设置（可选）
+notifications:
+  - provider: Email
+    to:
+      - 1498646901@qq.com
+    on_build_success: true
+    on_build_failure: true
